@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "mi-movil",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}

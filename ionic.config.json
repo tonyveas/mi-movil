@@ -1,0 +1,8 @@
+{
+  "name": "mi-movil",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "6df7d07d"
+}
