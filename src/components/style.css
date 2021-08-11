@@ -1,0 +1,56 @@
+.ion-activatable {
+    position: relative; 
+    overflow: hidden;
+  }
+
+.root {
+    width: '100%',
+}
+
+.boton{  
+  height: auto;
+  text-align: center;
+  /* font-size: 11px;
+  background-color: lightpink; */
+}
+
+.grid { 
+  height: auto;
+  padding: 15px 20px;
+  vertical-align: middle;
+}
+
+.margen{
+  margin: 15px;
+}
+
+.responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+.row {
+    height: 45%;
+}
+
+.menuBtn{
+  margin: 47px;
+}
+
+.search{
+    padding: '2px 4px';
+    display: 'flex';
+    width: 400;
+}
+
+.inputSearch{
+  margin-left: 1;
+  flex: 1,
+}
+
+.btn_eye_icon{
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  background: transparent;
+}
