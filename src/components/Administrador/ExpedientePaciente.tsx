@@ -479,7 +479,7 @@ const ExpedientePaciente = (props:any) => {
 
                             <IonItemDivider>
                                 <IonLabel style = {{marginLeft:130}}>
-                                    Historico citas
+                                    Histórico citas
                                 </IonLabel>
                             </IonItemDivider>
 
