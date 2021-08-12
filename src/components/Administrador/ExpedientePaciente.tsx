@@ -1,6 +1,6 @@
 import { IonPage, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonList, IonInput, IonText, IonTextarea, IonButton, IonRouterLink, IonAlert, IonLoading, useIonViewWillLeave, useIonViewWillEnter, IonIcon, IonDatetime, IonSelect, IonSelectOption, IonItemDivider, IonChip, IonBadge, IonRippleEffect, IonAvatar} from '@ionic/react'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {create, eye, eyeOff, trash} from 'ionicons/icons';
 import AxiosUsers from '../../Services/AxiosUsers';
 import AxiosRoles from '../../Services/AxiosRoles';
@@ -372,8 +372,9 @@ const ExpedientePaciente = (props:any) => {
                             </IonItemDivider>
 
                             {
-                                discapacidades.length === 0? <>
-                                    <Respuesta />
+                                discapacidades.length !== 0? <>
+                                    {/* <Respuesta /> */}
+                                    <p className="text-center lead mt-2">Sin datos para mostrar</p>
                                 </>:
                                 <>
                                     {
@@ -454,7 +455,8 @@ const ExpedientePaciente = (props:any) => {
                             {
 
                                 citas.map ( (item:any, index:any) =>(
-
+                                    
+                                    <Link key = {index} to = {`/medico/citaanterior/paciente/${item.id_cita}/${ced}`} className = "me-4">
                                     <IonItem lines="none" key = {index} className = "ion-activatable">
                                         {/* <IonLabel className="ion-text-center"> */}
                                         <IonLabel className="">
@@ -470,7 +472,7 @@ const ExpedientePaciente = (props:any) => {
                                        </IonLabel>
                                         <IonButton size="default" fill="clear" routerLink={`/edit/discapacidades/${props.id_discapacidad}`}><IonIcon slot="end" color="medium" icon={eye}></IonIcon></IonButton>
                                     </IonItem>
-
+                                    </Link>
                                 ))
 
                             }
@@ -516,7 +518,7 @@ const ExpedientePaciente = (props:any) => {
                                 </IonCol>
                             </IonRow>
  */}
-                            <IonRow style={{marginTop: 20 }} className = "ion-text-center">
+                            {/* <IonRow style={{marginTop: 20 }} className = "ion-text-center">
                                 <IonCol>
                                     <IonButton color="primary" type="submit" class="ion-no-margin">{editionMode?'Guardar cambios':'Guardar'}</IonButton>
                                 </IonCol>
@@ -527,7 +529,7 @@ const ExpedientePaciente = (props:any) => {
                                         </IonRouterLink>
                                     </IonButton>          
                                 </IonCol>
-                            </IonRow>
+                            </IonRow> */}
 
                         </IonGrid>
                     </IonList>

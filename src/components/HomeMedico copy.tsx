@@ -37,6 +37,18 @@ import {
     //   cantidad_recordatorios();
     });
   
+    // const cantidad_recordatorios = () => {
+    //   AxiosRecordatorios.recordatorios_actuales().then(res => {
+    //     setCantidad(res.data.length)
+    //   }).catch(err => {
+    //     if (err.response) {
+    //       setCantidad('0')
+    //     }
+    //   });
+    // }
+  
+   
+  
     return (
       <IonPage>
         <IonHeader>
@@ -52,7 +64,7 @@ import {
         </IonHeader>
         <IonContent>
           <IonGrid class="grid">
-            {/* <IonRow  class="row">
+            <IonRow  class="row">
               <IonCol  size="12">     
                 <IonButton color="primary" class="boton" routerLink="/medico/calendario" expand="block" size="large">
                 <div className="margen">
@@ -60,8 +72,8 @@ import {
                 </div> 
                 </IonButton>
               </IonCol>
-            </IonRow> */}
-            <IonRow style = {{marginTop:180}} class="row">
+            </IonRow>
+            <IonRow  class="row">
               <IonCol  size="12">     
                 <IonButton color="primary" class="boton" routerLink="/medico/homepacientes" expand="block" size="large">
                 <div className="margen">
@@ -70,7 +82,7 @@ import {
                 </IonButton>
               </IonCol>
             </IonRow>
-            {/* <IonRow  class="row">
+            <IonRow  class="row">
               <IonCol  size="12">     
                 <IonButton color="primary" class="boton" routerLink="/medico/seguimiento" expand="block" size="large">
                 <div className="margen">
@@ -78,7 +90,7 @@ import {
                 </div> 
                 </IonButton>
               </IonCol>
-            </IonRow> */}
+            </IonRow>
           </IonGrid>
         </IonContent>
       </IonPage>

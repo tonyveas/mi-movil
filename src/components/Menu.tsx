@@ -100,7 +100,7 @@ const Menu: React.FC = () => {
           
           <IonMenuToggle autoHide={false}>
             {/* <IonItem lines = "none" style={{ marginTop: 60, marginLeft: 3 }} routerLink='/home' routerDirection="none"> */}
-            <IonItem lines = "none" style={{ marginTop: 10, marginLeft: 3 }} routerLink='/home' routerDirection="none">
+            <IonItem lines = "none" style={{ marginTop: 10, marginLeft: 3 }} routerLink='/medico' routerDirection="none">
               <IonIcon slot="start" icon={home} />
               <IonLabel>Menú principal</IonLabel>
             </IonItem>

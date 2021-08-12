@@ -40,6 +40,8 @@ import HomeMedico from './components/HomeMedico';
 import Imagenes from './components/Administrador/Imagenes';
 import HomePacientes from './components/Administrador/HomePacientes';
 import ExpedientePaciente from './components/Administrador/ExpedientePaciente';
+import Image from './components/Administrador/Image';
+import VisualizarCita from './components/Cita/VisualizarCita';
 
 const App: React.FC = () => {
   return (
@@ -75,10 +77,11 @@ const App: React.FC = () => {
             <Route path="/edit/roles/:id" component = {FormularioRoles} exact={true} />
 
             <Route path="/perfil/:ced" component = {FormularioPerfiles} exact={true} />
-
             <Route path="/medico/atendercita" component = {AtenderCita} exact={true} />
             <Route path="/medico" component = {HomeMedico} exact={true} />
+            <Route path="/medico/citaanterior/paciente/:id/:ced" component = {VisualizarCita} exact={true} />
             <Route path="/imagenes" component = {Imagenes} exact={true} />
+            <Route path="/images" component = {Image} exact={true} />
             <Route path="/medico/homepacientes" component = {HomePacientes} exact={true} />
             <Route path="/medico/homepacientes/expedientepaciente/:ced" component = {ExpedientePaciente} exact={true} />
 
