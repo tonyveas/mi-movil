@@ -7,7 +7,15 @@ import Auth from '../Login/Auth';
 
 // type PropsWithChildren<P> = P & { children?: React.ReactNode };
 
-type Props = { component: FunctionComponent } & RouteComponentProps;
+{/* history, location, match */}
+
+// type Props = { component: FunctionComponent, exact:boolean, path: string } & RouteComponentProps;
+
+// type Props = { component: FunctionComponent, exact:boolean, path: string, history: any, location: any, match: any } & RouteComponentProps;
+
+// type Props = { component: FunctionComponent, exact:boolean, path: string } & RouteComponentProps;
+
+type Props = { component: FunctionComponent, exact:boolean, path: string };
 
 const PrivateRouteAdmin:React.FC <Props>  = ({component:Component, ...rest}) => {
     return (    

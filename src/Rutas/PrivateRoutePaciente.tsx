@@ -7,7 +7,7 @@ import Auth from '../Login/Auth';
 
 // type PropsWithChildren<P> = P & { children?: React.ReactNode };
 
-type Props = { component: FunctionComponent } & RouteComponentProps;
+type Props = { component: FunctionComponent, exact:boolean, path: string };
 
 const PrivateRoutePaciente:React.FC <Props>  = ({component:Component, ...rest}) => {
     return (    

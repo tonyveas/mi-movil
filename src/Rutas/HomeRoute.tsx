@@ -7,9 +7,9 @@ import Auth from '../Login/Auth';
 
 // type PropsWithChildren<P> = P & { children?: React.ReactNode };
 
-type Props = { component: FunctionComponent } & RouteComponentProps;
+type Props = {exact:boolean, path: string };
 
-const HomeRoute:React.FC <Props>  = ({component:Component, ...rest}) => {
+const HomeRoute:React.FC <Props>  = ({...rest}) => {
     return (    
             <Route {...rest} render={
                 (props:any) => (

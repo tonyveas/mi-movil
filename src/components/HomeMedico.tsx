@@ -28,7 +28,7 @@ import {
   //import MenuLateral from '../components/Menu_Lateral';
   
   
-  const HomeMedico: React.FC<RouteComponentProps> = (props) => {
+  const HomeMedico: React.FC = (props) => {
     
     const [cantidad, setCantidad] = useState("");
   
