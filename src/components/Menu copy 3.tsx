@@ -14,13 +14,10 @@ import {
   IonAvatar,
   IonButton,
   IonCard,
-  useIonViewWillEnter,
-  IonAlert,
-  IonLoading
+  useIonViewWillEnter
 } from '@ionic/react';
 
 import React from 'react';
-
 
 import { RouteComponentProps, withRouter, Redirect, useLocation } from 'react-router-dom';
 import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp, home, desktop, logOut, list, pricetag, person } from 'ionicons/icons';
@@ -75,7 +72,7 @@ const appPages: AppPage[] = [
 
 const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
-const Menu = (props:any) => {
+const Menu: React.FC = () => {
 
   const [cedula, setCedula] = React.useState("");
   const [nombre, setNombre] = React.useState("");
@@ -84,7 +81,6 @@ const Menu = (props:any) => {
   const [routePrincipal, setRoutePrincipal] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [ocultar, setOcultar] = React.useState(false);
-  const [cargando, setCargando] = React.useState(false);
 
   const getDataUser = () => {
     let data = Auth.getDataUser();
@@ -97,17 +93,6 @@ const Menu = (props:any) => {
         return data.nombre + " " + data.apellido
     }
     return '';
-  }
-
-  const cerrar_sesion = () => {
-    // setCargando(true);
-    Auth.logout();    
-    // setTimeout(() => {
-    // }, 1000);
-    // setCargando(false);
-    // props.history.push('/login');
-    //props.history.push('/homeusuarios');
-    //return <Redirect to='/login' />
   }
 
   const getRoutePerfil = () => {
@@ -124,7 +109,7 @@ const Menu = (props:any) => {
   }
 
   React.useEffect(()=> {
-    //console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ0000000");
+    console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ0000000");
     getDataUser();
     //setNombreUsuario(getDataUser());
     setRoute(getRoutePerfil() + `/perfil/${Auth.getDataUser().cedula}`);
@@ -189,9 +174,7 @@ const Menu = (props:any) => {
             </IonItem>
           </IonMenuToggle> */}
           <IonMenuToggle autoHide={false}>
-            {/* <IonItem onClick = {() => cerrar_sesion()} lines = "none"> */}
-            {/* <IonItem onClick = {() => cerrar_sesion()} lines = "none"> */}
-            <IonItem onClick={() => cerrar_sesion()} lines = "none" routerLink='/login'>
+            <IonItem onClick={() => {Auth.logout()}} lines = "none" routerLink='/login' routerDirection="none">
               <IonIcon slot="start" icon={logOut} />
               <IonLabel >Cerrar sesión</IonLabel>
             </IonItem>
@@ -226,28 +209,9 @@ const Menu = (props:any) => {
             </IonItem>
           ))}
         </IonList> */}
-        <IonLoading
-          isOpen={cargando}
-          message={'Cerrando sesión...'}
-        />
-
-        {/* <IonAlert
-            isOpen={error}
-            subHeader={'Error:'}
-            message={mensaje}
-            buttons={[          
-            {
-                text: 'Ok',
-                handler: () => {
-                console.log('Aceptar');
-                setError(false);
-                }
-            },
-            ]}
-        /> */}
       </IonContent>
     </IonMenu>
   );
 };
 
-export default Menu;
+export default withRouter(Menu);

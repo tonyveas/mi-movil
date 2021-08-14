@@ -38,7 +38,7 @@ const FormularioUsuarios = (props:any) => {
     const {ced} = useParams<{ced:string}>();
 
     useIonViewWillEnter(() => {
-        console.log('ionViewWillEnter event fired');
+        //console.log('ionViewWillEnter event fired');
         mostrar_roles();
         if (editionMode){
             setCargando(true);

@@ -22,7 +22,7 @@ const FormularioRoles = (props:any) => {
     const {id} = useParams<{id:string}>();
 
     useIonViewWillEnter(() => {
-        console.log('ionViewWillEnter event fired');
+        //console.log('ionViewWillEnter event fired');
         if (editionMode){
             setCargando(true);
             obtener_rol_por_id();

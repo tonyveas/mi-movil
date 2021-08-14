@@ -15,21 +15,21 @@ const Login = (props:any) => {
     const [error, setError] = React.useState(false);
     const [mensaje, setMensaje] = React.useState("");
 
-    useIonViewWillEnter(() => {
-        console.log('ionViewWillEnter event fired');
-        console.log("Mi: ",Auth.getDataUser());
-        console.log("Mi: ",Auth.isAdmin());
-        console.log("isLogin: ",Auth.isLogin());
-        console.log("Mi:  ",localStorage.getItem('userdata'))
-        // localStorage.setItem('userdata',JSON.stringify({
-        //     "username": 0,
-        //     "cedula": "0812345671",
-        //     "nombre": "Luis",
-        //     "apellido": "Fuentes",
-        //     "rol": "Medico",
-        //     "estado": "A"
-        // }));
-    });
+    // useIonViewWillEnter(() => {
+    //     console.log('ionViewWillEnter event fired');
+    //     console.log("Mi: ",Auth.getDataUser());
+    //     console.log("Mi: ",Auth.isAdmin());
+    //     console.log("isLogin: ",Auth.isLogin());
+    //     console.log("Mi:  ",localStorage.getItem('userdata'))
+    //     localStorage.setItem('userdata',JSON.stringify({
+    //         "username": 0,
+    //         "cedula": "0812345671",
+    //         "nombre": "Luis",
+    //         "apellido": "Fuentes",
+    //         "rol": "Medico",
+    //         "estado": "A"
+    //     }));
+    // });
 
     
 
@@ -46,17 +46,31 @@ const Login = (props:any) => {
         login();
     }
 
+    const getRoutePerfil = () => {
+        if (Auth.isMedico()) {
+            return '/medico';
+        }
+        if (Auth.isPaciente()) {
+            return '/paciente';
+        }
+        if (Auth.isCuidador()) {
+            return '/cuidador';
+        }
+        return '/admin'
+    }
+
     const login = () => {
         setCargando(true);
         AxiosUsers.login({"username":usuario, "password":pass}).then(res => {
             Auth.login(res.data);
-            console.log("Login: ", res.data);
-            console.log("D: ",Auth.getDataUser());
-            setCargando(false);
-            // setTimeout(() => {
-            //     message.success({ content: 'Sesion Iniciada con Exito', key, duration: 3 });
-            // }, 1000);
-            props.history.push("/");
+
+            console.log("BBBBBB: ",Auth.isMedico());
+
+            setTimeout(() => {
+                setCargando(false);
+                //message.success({ content: 'Sesion Iniciada con Exito', key, duration: 3 });
+            }, 1000);
+            props.history.push(getRoutePerfil());
         }).catch(error => {
             setCargando(false);
             console.log(error, error.response, 'error login')
@@ -162,7 +176,7 @@ const Login = (props:any) => {
                     {
                         text: 'Ok',
                         handler: () => {
-                        console.log('Aceptar');
+                        //console.log('Aceptar');
                         setError(false);
                         }
                     },

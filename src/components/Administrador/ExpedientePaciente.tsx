@@ -113,7 +113,7 @@ const ExpedientePaciente = (props:any) => {
     }
 
     useIonViewWillEnter(() => {
-        console.log('ionViewWillEnter event fired');
+        //console.log('ionViewWillEnter event fired');
         mostrar_informacion_expediente();
         obtener_usuario_por_cedula();
     });

@@ -32,10 +32,10 @@ import {
     
     const [cantidad, setCantidad] = useState("");
   
-    useIonViewWillEnter(() => {
-      console.log('ionViewWillEnter event fired');
+//    useIonViewWillEnter(() => {
+      //console.log('ionViewWillEnter event fired');
     //   cantidad_recordatorios();
-    });
+  //  });
   
     // const cantidad_recordatorios = () => {
     //   AxiosRecordatorios.recordatorios_actuales().then(res => {

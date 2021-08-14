@@ -21,7 +21,6 @@ import {
 
 import React from 'react';
 
-
 import { RouteComponentProps, withRouter, Redirect, useLocation } from 'react-router-dom';
 import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp, home, desktop, logOut, list, pricetag, person } from 'ionicons/icons';
 import './Menu.css';
@@ -75,7 +74,7 @@ const appPages: AppPage[] = [
 
 const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
-const Menu = (props:any) => {
+const Menu: React.FC = (props:any) => {
 
   const [cedula, setCedula] = React.useState("");
   const [nombre, setNombre] = React.useState("");
@@ -100,14 +99,10 @@ const Menu = (props:any) => {
   }
 
   const cerrar_sesion = () => {
-    // setCargando(true);
-    Auth.logout();    
-    // setTimeout(() => {
-    // }, 1000);
-    // setCargando(false);
-    // props.history.push('/login');
-    //props.history.push('/homeusuarios');
-    //return <Redirect to='/login' />
+    setCargando(true);
+    Auth.logout();
+    props.history.push('/login');
+    setCargando(false);
   }
 
   const getRoutePerfil = () => {
@@ -124,7 +119,7 @@ const Menu = (props:any) => {
   }
 
   React.useEffect(()=> {
-    //console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ0000000");
+    console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ0000000");
     getDataUser();
     //setNombreUsuario(getDataUser());
     setRoute(getRoutePerfil() + `/perfil/${Auth.getDataUser().cedula}`);
@@ -189,9 +184,7 @@ const Menu = (props:any) => {
             </IonItem>
           </IonMenuToggle> */}
           <IonMenuToggle autoHide={false}>
-            {/* <IonItem onClick = {() => cerrar_sesion()} lines = "none"> */}
-            {/* <IonItem onClick = {() => cerrar_sesion()} lines = "none"> */}
-            <IonItem onClick={() => cerrar_sesion()} lines = "none" routerLink='/login'>
+            <IonItem onClick = {() => cerrar_sesion()} lines = "none">
               <IonIcon slot="start" icon={logOut} />
               <IonLabel >Cerrar sesión</IonLabel>
             </IonItem>

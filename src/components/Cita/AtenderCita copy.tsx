@@ -65,7 +65,7 @@ const AtenderCita = (props:any) => {
     const {ced} = useParams<{ced:string}>();
 
     useIonViewWillEnter(() => {
-        console.log('ionViewWillEnter event fired');
+        //console.log('ionViewWillEnter event fired');
         mostrar_roles();
         obtener_perfil_por_cedula();
         mostrar_discapacidades();

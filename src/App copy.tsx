@@ -93,7 +93,7 @@ const App: React.FC = () => {
             <PublicRoute exact path="/iniciarsesion" component = {Login} />
 
             {/* Admin */}
-            <Priva exact path='/admin' component={HomeAdmin} layout={AdminLayout} />
+            {/* <Priva exact path='/admin' component={HomeAdmin} layout={AdminLayout} />
             <PrivateRouteAdmin exact path='/admin/formulariodiscapacidades' component={FormularioDiscapacidades} layout={AdminLayout} />
             <PrivateRouteAdmin exact path='/admin/formulariousuarios' component={FormularioUsuarios} layout={AdminLayout} />
             <PrivateRouteAdmin exact path='/admin/formularioroles' component={FormularioRoles} layout={AdminLayout} />
@@ -109,7 +109,7 @@ const App: React.FC = () => {
             <PrivateRouteAdmin exact path='/admin/edit/discapacidades/:id' component={FormularioDiscapacidades} layout={AdminLayout} />
             <PrivateRouteAdmin exact path='/admin/edit/usuarios/:ced' component={FormularioUsuarios} layout={AdminLayout} />
             <PrivateRouteAdmin exact path='/admin/edit/roles/:id' component={FormularioRoles} layout={AdminLayout} />
-            <PrivateRouteAdmin exact path='/admin/perfil/:ced' component={FormularioPerfiles} layout={AdminLayout} />
+            <PrivateRouteAdmin exact path='/admin/perfil/:ced' component={FormularioPerfiles} layout={AdminLayout} /> */}
 
 
           </IonRouterOutlet>

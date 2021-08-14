@@ -22,7 +22,7 @@ const FormularioMedicamentos = (props:any) => {
     const {id} = useParams<{id:string}>();
 
     useIonViewWillEnter(() => {
-        console.log('ionViewWillEnter event fired');
+        //console.log('ionViewWillEnter event fired');
         if (editionMode){
             setCargando(true);
             obtener_medicamento_por_id();
