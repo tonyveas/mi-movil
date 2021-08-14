@@ -26,7 +26,7 @@ const ListaEnfermedades  = (props:any) => {
                 <IonAvatar slot="start">
                     <img src="./assets/img/icons/enfermedades/enfermedad.png"  alt="enfermedad" />
                 </IonAvatar> 
-                <IonButton size="default" fill="clear" routerLink={`/edit/enfermedades/${props.id_enfermedad}`}><IonIcon slot="end" color="medium" icon={create}></IonIcon></IonButton>
+                <IonButton size="default" fill="clear" routerLink={`/admin/edit/enfermedades/${props.id_enfermedad}`}><IonIcon slot="end" color="medium" icon={create}></IonIcon></IonButton>
                 <IonButton size="default" fill="clear" onClick = { () => props.handler_eliminar() }><IonIcon slot="end" color="medium" icon={trash}></IonIcon></IonButton>
             </IonItem>
 

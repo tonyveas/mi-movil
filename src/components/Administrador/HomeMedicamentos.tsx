@@ -91,11 +91,11 @@ const HomeMedicamentos = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/home"></IonBackButton>
+                    <IonBackButton defaultHref="/admin"></IonBackButton>
                 </IonButtons>
                 <IonTitle>Gestionar medicamentos</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton routerLink="/formulariomedicamentos"><IonIcon icon={add}></IonIcon></IonButton>
+                    <IonButton routerLink="/admin/formulariomedicamentos"><IonIcon icon={add}></IonIcon></IonButton>
                 </IonButtons>
             </IonToolbar>
 

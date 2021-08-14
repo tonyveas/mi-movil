@@ -100,11 +100,11 @@ const HomeRoles = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/home"></IonBackButton>
+                    <IonBackButton defaultHref="/admin"></IonBackButton>
                 </IonButtons>
                 <IonTitle>Gestionar roles</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton routerLink="/formularioroles"><IonIcon icon={add}></IonIcon></IonButton>
+                    <IonButton routerLink="/admin/homeroles"><IonIcon icon={add}></IonIcon></IonButton>
                 </IonButtons>
             </IonToolbar>
 

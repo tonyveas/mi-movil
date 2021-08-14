@@ -84,7 +84,7 @@ const FormularioRoles = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/homeroles"></IonBackButton>
+                    <IonBackButton defaultHref="/admin/homeroles"></IonBackButton>
                 </IonButtons> 
                 <IonTitle >  {editionMode?'Editar Rol':'Registrar rol'} </IonTitle>
                 <IonButtons slot="end">
@@ -123,7 +123,7 @@ const FormularioRoles = (props:any) => {
                                 </IonCol>
                                 <IonCol>
                                     <IonButton color="danger" class="ion-no-margin">
-                                        <IonRouterLink color = "light" href = "/homeroles">
+                                        <IonRouterLink color = "light" href = "/admin/homeroles">
                                             Cancelar
                                         </IonRouterLink>
                                     </IonButton>          

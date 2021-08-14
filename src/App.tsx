@@ -42,7 +42,16 @@ import HomePacientes from './components/Administrador/HomePacientes';
 import ExpedientePaciente from './components/Administrador/ExpedientePaciente';
 import Image from './components/Administrador/Image';
 import VisualizarCita from './components/Cita/VisualizarCita';
+import Login from '../src/Login/Login';
+import PrivateRoute from './Rutas/PrivateRoute';
+import PublicRoute from './Rutas/PublicRoute';
+import PrivateRouteAdmin from './Rutas/PrivateRouteAdmin';
+import HomeRoute from './Rutas/HomeRoute';
+import PrivateRouteMedico from './Rutas/PrivateRouteMedico';
+import PrivateRoutePaciente from './Rutas/PrivateRoutePaciente';
+import PrivateRouteCuidador from './Rutas/PrivateRouteCuidador';
 
+ 
 const App: React.FC = () => {
   return (
     <IonApp>
@@ -50,40 +59,44 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu />
           <IonRouterOutlet id="main">
-            <Route path="/Home" component = {Home} exact = {true} />
-            {/* <Route path="/page/:name" exact={true}>
-              <Page />
-            </Route> */}
-            <Route path="/" component = {Home} exact={true} />
 
-            <Route path="/homemedicamentos" component = {HomeMedicamentos} exact={true} />
-            <Route path="/formulariomedicamentos" component = {FormularioMedicamentos} exact={true} />
-            <Route path="/edit/medicamentos/:id" component = {FormularioMedicamentos} exact={true} />
+            {/* Públicas */}
+            <HomeRoute exact path="/" />
+            <PublicRoute exact path='/login' component={Login}/>
 
-            <Route path="/homeenfermedades" component = {HomeEnfermedades} exact={true} />
-            <Route path="/formularioenfermedades" component = {FormularioEnfermedades} exact={true} />
-            <Route path="/edit/enfermedades/:id" component = {FormularioEnfermedades} exact={true} />
+            {/* Admin */}
+            <PrivateRouteAdmin exact path='/admin' component={Home}/>
+            <PrivateRouteAdmin exact path='/admin/formulariodiscapacidades' component={FormularioDiscapacidades}/>
+            <PrivateRouteAdmin exact path='/admin/formulariousuarios' component={FormularioUsuarios}/>
+            <PrivateRouteAdmin exact path='/admin/formularioroles' component={FormularioRoles}/>
+            <PrivateRouteAdmin exact path='/admin/formulariomedicamentos' component={FormularioMedicamentos}/>
+            <PrivateRouteAdmin exact path='/admin/formularioenfermedades' component={FormularioEnfermedades}/>
+            <PrivateRouteAdmin exact path='/admin/homeenfermedades' component={HomeEnfermedades}/>
+            <PrivateRouteAdmin exact path='/admin/homemedicamentos' component={HomeMedicamentos}/>
+            <PrivateRouteAdmin exact path='/admin/homediscapacidades' component={HomeDiscapacidades}/>
+            <PrivateRouteAdmin exact path='/admin/homeusuarios' component={HomeUsuarios}/>
+            <PrivateRouteAdmin exact path='/admin/homeroles' component={HomeRoles}/>
+            <PrivateRouteAdmin exact path='/admin/edit/enfermedades/:id' component={FormularioEnfermedades}/>
+            <PrivateRouteAdmin exact path='/admin/edit/medicamentos/:id' component={FormularioMedicamentos}/>
+            <PrivateRouteAdmin exact path='/admin/edit/discapacidades/:id' component={FormularioDiscapacidades}/>
+            <PrivateRouteAdmin exact path='/admin/edit/usuarios/:ced' component={FormularioUsuarios}/>
+            <PrivateRouteAdmin exact path='/admin/edit/roles/:id' component={FormularioRoles}/>
+            <PrivateRouteAdmin exact path='/admin/perfil/:ced' component={FormularioPerfiles}/>
 
-            <Route path="/homediscapacidades" component = {HomeDiscapacidades} exact={true} />
-            <Route path="/formulariodiscapacidades" component = {FormularioDiscapacidades} exact={true} />
-            <Route path="/edit/discapacidades/:id" component = {FormularioDiscapacidades} exact={true} />
+            {/* Médico */}
+            <PrivateRouteMedico exact path='/medico' component={HomeMedico}/>
+            {/* <PrivateRouteMedico exact path='/medico/atenderCita' component={AtenderCita}/>
+            <PrivateRouteMedico exact path='/medico/atenderCita/:id' component={AtenderCita}/> */}
+            <PrivateRouteMedico exact path='/medico/homepacientes' component={HomePacientes}/>
+            <PrivateRouteMedico exact path='/medico/homepacientes/expedientepaciente/:ced' component={ExpedientePaciente}/>
+            <PrivateRouteMedico exact path='/medico/citaanterior/paciente/:id/:ced' component={VisualizarCita}/>
+            <PrivateRouteMedico exact path='/medico/perfil/:ced' component={FormularioPerfiles}/>
 
-            <Route path="/homeusuarios" component = {HomeUsuarios} exact={true} />
-            <Route path="/formulariousuarios" component = {FormularioUsuarios} exact={true} />
-            <Route path="/edit/usuarios/:ced" component = {FormularioUsuarios} exact={true} />
+            {/* Paciente */}
+            <PrivateRoutePaciente exact path='/paciente/perfil/:ced' component={FormularioPerfiles} />
 
-            <Route path="/homeroles" component = {HomeRoles} exact={true} />
-            <Route path="/formularioroles" component = {FormularioRoles} exact={true} />
-            <Route path="/edit/roles/:id" component = {FormularioRoles} exact={true} />
-
-            <Route path="/perfil/:ced" component = {FormularioPerfiles} exact={true} />
-            <Route path="/medico/atendercita" component = {AtenderCita} exact={true} />
-            <Route path="/medico" component = {HomeMedico} exact={true} />
-            <Route path="/medico/citaanterior/paciente/:id/:ced" component = {VisualizarCita} exact={true} />
-            <Route path="/imagenes" component = {Imagenes} exact={true} />
-            <Route path="/images" component = {Image} exact={true} />
-            <Route path="/medico/homepacientes" component = {HomePacientes} exact={true} />
-            <Route path="/medico/homepacientes/expedientepaciente/:ced" component = {ExpedientePaciente} exact={true} />
+            {/* Cuidador */}
+            <PrivateRouteCuidador exact path='/paciente/perfil/:ced' component={FormularioPerfiles}/>
 
 
           </IonRouterOutlet>

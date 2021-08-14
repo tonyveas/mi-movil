@@ -6,6 +6,7 @@ import AxiosUsers from '../../Services/AxiosUsers';
 import AxiosRoles from '../../Services/AxiosRoles';
 import '../../../src/components/style.css';
 import moment from 'moment';
+import Auth from '../../Login/Auth';
 
 const FormularioPerfiles = (props:any) => {
 
@@ -13,6 +14,7 @@ const FormularioPerfiles = (props:any) => {
     const [listaRoles, setListaRoles] = React.useState([]);
     const [passwordMode, setPasswordMode] = React.useState(true);
     const [passwordModeConfirm, setPasswordModeConfirm] = React.useState(true);
+    const [route, setRoute] = React.useState("");
     
     const [cedula, setCedula] = React.useState("");
     const [nombre, setNombre] = React.useState("");
@@ -44,7 +46,21 @@ const FormularioPerfiles = (props:any) => {
         console.log('ionViewWillEnter event fired');
         mostrar_roles();
         obtener_perfil_por_cedula();
+        setRoute(getRoutePerfil());
     });
+
+    const getRoutePerfil = () => {
+        if (Auth.isMedico()) {
+            return '/medico';
+        }
+        if (Auth.isPaciente()) {
+            return '/paciente';
+        }
+        if (Auth.isCuidador()) {
+            return '/cuidador';
+        }
+        return '/admin'
+    }
 
     const obtener_perfil_por_cedula = () => {
         setCargando(true);
@@ -138,7 +154,7 @@ const FormularioPerfiles = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/homeusuarios"></IonBackButton>
+                    <IonBackButton defaultHref={route}></IonBackButton>
                 </IonButtons>
                 <IonTitle >  Mi perfil </IonTitle>
                 {/* <IonButtons slot="end">

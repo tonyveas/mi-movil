@@ -108,7 +108,7 @@ const HomePacientes = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/home"></IonBackButton>
+                    <IonBackButton defaultHref="/medico"></IonBackButton>
                 </IonButtons>
                 <IonTitle>Gestionar pacientes</IonTitle>
                 {/* <IonButtons slot="end">

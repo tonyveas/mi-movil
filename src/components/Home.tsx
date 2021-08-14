@@ -66,7 +66,7 @@ import {
           <IonGrid class="grid">
             <IonRow  class="row">
               <IonCol  size="12">     
-                <IonButton color="primary" class="boton" routerLink="/homeusuarios" expand="block" size="large">
+                <IonButton color="primary" class="boton" routerLink="/admin/homeusuarios" expand="block" size="large">
                 <div className="margen">
                   <img src={process.env.PUBLIC_URL + "/assets/img/main/img2/usuarios.png"} className="responsive" alt="" /><br/><br/><IonLabel>Usuarios</IonLabel>   
                 </div> 
@@ -82,7 +82,7 @@ import {
             </IonRow>
             <IonRow class="row">
               <IonCol size="12">
-                <IonButton color="primary" routerLink="/homediscapacidades" class="boton" expand="block" size="large">
+                <IonButton color="primary" routerLink="/admin/homediscapacidades" class="boton" expand="block" size="large">
                 <div className="margen">
                   <img src={process.env.PUBLIC_URL + "/assets/img/main/img2/discapacidades.png"} className="responsive" alt="" /><br/><br/><IonLabel>Discapacidades</IonLabel>   
                 </div>
@@ -91,7 +91,7 @@ import {
               </IonRow>
               <IonRow class="row">
               <IonCol size="12">
-                <IonButton color="primary" routerLink="/homeenfermedades" class="boton" expand="block" size="large">
+                <IonButton color="primary" routerLink="/admin/homeenfermedades" class="boton" expand="block" size="large">
                 <div className="margen">
                   <img src={process.env.PUBLIC_URL + "/assets/img/main/img2/enfermedades.png"} className="responsive" alt="" /><br/><br/><IonLabel>Enfermedades</IonLabel>   
                 </div>
@@ -100,7 +100,7 @@ import {
               </IonRow>
               <IonRow class="row">
               <IonCol size="12">
-                <IonButton color="primary" routerLink="/homemedicamentos" class="boton" expand="block" size="large">
+                <IonButton color="primary" routerLink="/admin/homemedicamentos" class="boton" expand="block" size="large">
                 <div className="margen">
                   <img src={process.env.PUBLIC_URL + "/assets/img/main/img2/medicinas.png"} className="responsive" alt="" /><br/><br/><IonLabel>Medicinas</IonLabel>   
                 </div>
@@ -109,7 +109,7 @@ import {
               </IonRow>
               <IonRow class="row">
               <IonCol size="12">
-                <IonButton color="primary" routerLink="/homeroles" class="boton" expand="block" size="large">
+                <IonButton color="primary" routerLink="/admin/homeroles" class="boton" expand="block" size="large">
                 <div className="margen">
                   <img src={process.env.PUBLIC_URL + "/assets/img/main/img2/roles.png"} className="responsive" alt="" /><br/><br/><IonLabel>Roles</IonLabel>   
                 </div>

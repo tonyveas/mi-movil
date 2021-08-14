@@ -100,11 +100,11 @@ const HomeEnfermedades = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/home"></IonBackButton>
+                    <IonBackButton defaultHref="/admin"></IonBackButton>
                 </IonButtons>
                 <IonTitle>Gestionar enfermedades</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton routerLink="/formularioenfermedades"><IonIcon icon={add}></IonIcon></IonButton>
+                    <IonButton routerLink="/admin/formularioenfermedades"><IonIcon icon={add}></IonIcon></IonButton>
                 </IonButtons>
             </IonToolbar>
 

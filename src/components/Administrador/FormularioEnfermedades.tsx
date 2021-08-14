@@ -88,7 +88,7 @@ const FormularioEnfermedades = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/homeenfermedades"></IonBackButton>
+                    <IonBackButton defaultHref="/admin/homeenfermedades"></IonBackButton>
                 </IonButtons>
                 <IonTitle >  {editionMode?'Editar Enfermedad':'Registrar enfermedad'} </IonTitle>
                 <IonButtons slot="end">
@@ -143,7 +143,7 @@ const FormularioEnfermedades = (props:any) => {
                                 </IonCol>
                                 <IonCol>
                                     <IonButton color="danger" class="ion-no-margin">
-                                        <IonRouterLink color = "light" href = "/homeenfermedades">
+                                        <IonRouterLink color = "light" href = "/admin/formularioenfermedades">
                                             Cancelar
                                         </IonRouterLink>
                                     </IonButton>          

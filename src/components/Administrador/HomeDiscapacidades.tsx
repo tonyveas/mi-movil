@@ -101,11 +101,11 @@ const HomeDiscapacidades = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/home"></IonBackButton>
+                    <IonBackButton defaultHref="/admin"></IonBackButton>
                 </IonButtons>
                 <IonTitle>Gestionar discapacidades</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton routerLink="/formulariodiscapacidades"><IonIcon icon={add}></IonIcon></IonButton>
+                    <IonButton routerLink="/admin/formulariodiscapacidades"><IonIcon icon={add}></IonIcon></IonButton>
                 </IonButtons>
             </IonToolbar>
 

@@ -165,7 +165,7 @@ const FormularioUsuarios = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/homeusuarios"></IonBackButton>
+                    <IonBackButton defaultHref="/admin/homeusuarios"></IonBackButton>
                 </IonButtons>
                 <IonTitle >  {editionMode?'Editar Usuario':'Registrar usuario'} </IonTitle>
                 <IonButtons slot="end">
@@ -303,7 +303,7 @@ const FormularioUsuarios = (props:any) => {
                                 </IonCol>
                                 <IonCol>
                                     <IonButton color="danger" class="ion-no-margin">
-                                        <IonRouterLink color = "light" href = "/homeusuarios">
+                                        <IonRouterLink color = "light" href = "/admin/homeusuarios">
                                             Cancelar
                                         </IonRouterLink>
                                     </IonButton>          

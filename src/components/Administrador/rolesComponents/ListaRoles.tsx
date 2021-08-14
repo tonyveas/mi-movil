@@ -26,7 +26,7 @@ const ListaRoles  = (props:any) => {
                 <IonAvatar slot="start">
                     <img src="./assets/img/icons/roles/rol.png"  alt="rol" />
                 </IonAvatar> 
-                <IonButton size="default" fill="clear" routerLink={`/edit/roles/${props.id_rol}`}><IonIcon slot="end" color="medium" icon={create}></IonIcon></IonButton>
+                <IonButton size="default" fill="clear" routerLink={`/admin/edit/roles/${props.id_rol}`}><IonIcon slot="end" color="medium" icon={create}></IonIcon></IonButton>
                 <IonButton size="default" fill="clear" onClick = { () => props.handler_eliminar() }><IonIcon slot="end" color="medium" icon={trash}></IonIcon></IonButton>
             </IonItem>
 

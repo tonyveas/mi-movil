@@ -86,7 +86,7 @@ const FormularioDiscapacidades = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/homediscapacidades"></IonBackButton>
+                    <IonBackButton defaultHref="/admin/homediscapacidades"></IonBackButton>
                 </IonButtons>
                 <IonTitle >  {editionMode?'Editar Discapacidad':'Registrar discapacidad'} </IonTitle>
                 <IonButtons slot="end">
@@ -133,7 +133,7 @@ const FormularioDiscapacidades = (props:any) => {
                                 </IonCol>
                                 <IonCol>
                                     <IonButton color="danger" class="ion-no-margin">
-                                        <IonRouterLink color = "light" href = "/homediscapacidades">
+                                        <IonRouterLink color = "light" href = "/admin/homediscapacidades">
                                             Cancelar
                                         </IonRouterLink>
                                     </IonButton>          

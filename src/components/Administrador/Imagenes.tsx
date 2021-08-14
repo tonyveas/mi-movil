@@ -5,7 +5,7 @@ import {
   import React, { useState } from 'react';
   import { options, add, arrowBack } from 'ionicons/icons';
   import Respuesta from '../../components/Respuesta';
-  import { Redirect } from 'react-router';
+  // import { Redirect } from 'react-router';
   // import { ImagePicker, ImagePickerOptions  } from '@ionic-native/image-picker/ngx';
   
   // declare const window: ImagePicker;

@@ -91,11 +91,11 @@ const HomeUsuarios = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/home"></IonBackButton>
+                    <IonBackButton defaultHref="/admin"></IonBackButton>
                 </IonButtons>
                 <IonTitle>Gestionar usuarios</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton routerLink="/formulariousuarios"><IonIcon icon={add}></IonIcon></IonButton>
+                    <IonButton routerLink="/admin/homeusuarios"><IonIcon icon={add}></IonIcon></IonButton>
                 </IonButtons>
             </IonToolbar>
 

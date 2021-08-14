@@ -13,12 +13,16 @@ import {
   IonTitle,
   IonAvatar,
   IonButton,
-  IonCard
+  IonCard,
+  useIonViewWillEnter
 } from '@ionic/react';
+
+import React from 'react';
 
 import { RouteComponentProps, withRouter, Redirect, useLocation } from 'react-router-dom';
 import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp, home, desktop, logOut, list, pricetag, person } from 'ionicons/icons';
 import './Menu.css';
+import Auth from '../Login/Auth';
 
 interface AppPage {
   url: string;
@@ -69,9 +73,61 @@ const appPages: AppPage[] = [
 const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
 const Menu: React.FC = () => {
-  const location = useLocation();
 
-  const ced = "0954003067";
+  const [cedula, setCedula] = React.useState("");
+  const [nombre, setNombre] = React.useState("");
+  const [apellido, setApellido] = React.useState("");
+  const [route, setRoute] = React.useState("");
+  const [routePrincipal, setRoutePrincipal] = React.useState("");
+  const [username, setUsername] = React.useState("");
+  const [ocultar, setOcultar] = React.useState(false);
+
+  const getDataUser = () => {
+    let data = Auth.getDataUser();
+    console.log(Auth.getDataUser().cedula)
+    setCedula(data.cedula);
+    if (data) {
+        setNombre(data.nombre);
+        setApellido(data.apellido);
+        setUsername(data.username);
+        return data.nombre + " " + data.apellido
+    }
+    return '';
+  }
+
+  const getRoutePerfil = () => {
+      if (Auth.isMedico()) {
+          return '/medico';
+      }
+      if (Auth.isPaciente()) {
+          return '/paciente';
+      }
+      if (Auth.isCuidador()) {
+          return '/cuidador';
+      }
+      return '/admin'
+  }
+
+  React.useEffect(()=> {
+    console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ0000000");
+    getDataUser();
+    //setNombreUsuario(getDataUser());
+    setRoute(getRoutePerfil() + `/perfil/${Auth.getDataUser().cedula}`);
+    setRoutePrincipal(getRoutePerfil());
+  })
+
+  /*
+  useIonViewWillEnter(() => {
+    console.log('ionViewWillEnter event fired');
+    console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ0000000");
+    getDataUser();
+    //setNombreUsuario(getDataUser());
+    setRoute(getRoutePerfil() + `/perfil/${Auth.getDataUser().cedula}`);
+  });
+  */
+
+  const location = useLocation();
+  //const ced = "0954003067";
 
   return (
     <IonMenu contentId="main" type="overlay">
@@ -82,15 +138,15 @@ const Menu: React.FC = () => {
               <img src="./assets/img/avatar.svg" alt="" />
             </IonAvatar>
             <IonLabel>
-              <h3>Nombre: Tony</h3>
-              <h3>Apellido: Veas</h3>
-              <p>Usuario: tonyvr996</p>
-              <p>Cédula: 0954003067</p>
+              <h3>Nombre: {nombre}</h3>
+              <h3>Apellido: {apellido}</h3>
+              {/* <p>Usuario: tonyvr996</p> */}
+              <p>Cédula: {cedula}</p>
             </IonLabel>
             {/* <IonLabel  color = "primary"><b>Ver perfil</b></IonLabel> */}
           </IonItem>
           <IonItem className = "ion-text-center">
-            <IonButton routerLink={`/perfil/${ced}`} style={{ marginLeft: 80, marginRight:80 }}>Ver perfil</IonButton>
+            <IonButton routerLink={route} style={{ marginLeft: 80, marginRight:80 }}>Ver perfil</IonButton>
           </IonItem>
         {/* </IonCard> */}
         <IonList>
@@ -100,7 +156,7 @@ const Menu: React.FC = () => {
           
           <IonMenuToggle autoHide={false}>
             {/* <IonItem lines = "none" style={{ marginTop: 60, marginLeft: 3 }} routerLink='/home' routerDirection="none"> */}
-            <IonItem lines = "none" style={{ marginTop: 10, marginLeft: 3 }} routerLink='/medico' routerDirection="none">
+            <IonItem lines = "none" style={{ marginTop: 10, marginLeft: 3 }} routerLink={routePrincipal} routerDirection="none">
               <IonIcon slot="start" icon={home} />
               <IonLabel>Menú principal</IonLabel>
             </IonItem>
@@ -118,9 +174,9 @@ const Menu: React.FC = () => {
             </IonItem>
           </IonMenuToggle> */}
           <IonMenuToggle autoHide={false}>
-            <IonItem lines = "none" routerLink='/iniciarsesion' routerDirection="none">
+            <IonItem onClick={() => {Auth.logout()}} lines = "none" routerLink='/login' routerDirection="none">
               <IonIcon slot="start" icon={logOut} />
-              <IonLabel>Cerrar sesión</IonLabel>
+              <IonLabel >Cerrar sesión</IonLabel>
             </IonItem>
           </IonMenuToggle>
         </IonList>
