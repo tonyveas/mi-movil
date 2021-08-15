@@ -7,13 +7,13 @@ import {
     IonAlert
 } from '@ionic/react';
 
-import { add } from 'ionicons/icons';
+import { add, arrowBackOutline } from 'ionicons/icons';
 import Respuesta from '../Respuesta';
 import AxiosUsers from '../../Services/AxiosUsers';
 import ListaUsuarios from './usuariosComponents/ListaUsuarios';
 import ListaPacientes from './pacientesComponents/ListaPacientes';
 
-const HomePacientes = () => {
+const HomePacientes = (props:any) => {
 
     const [pacientes, setPacientes] = React.useState(new Array<any>());
     const [cargando, setCargando] = React.useState(false);
@@ -108,7 +108,13 @@ const HomePacientes = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/medico"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/medico"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/medico">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons>
                 <IonTitle>Gestionar pacientes</IonTitle>
                 {/* <IonButtons slot="end">

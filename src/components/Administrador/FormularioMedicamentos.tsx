@@ -2,7 +2,7 @@ import { IonPage, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, I
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import AxiosMedicamentos from '../../Services/AxiosMedicamentos';
-import {trash} from 'ionicons/icons';
+import {arrowBackOutline, trash} from 'ionicons/icons';
 
 const FormularioMedicamentos = (props:any) => {
 
@@ -85,7 +85,13 @@ const FormularioMedicamentos = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/admin/homemedicamentos"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/admin/homemedicamentos"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin/homemedicamentos')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/admin/homemedicamentos">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons>
                 <IonTitle >  {editionMode?'Editar Medicamento':'Registrar medicamento'} </IonTitle>
                 <IonButtons slot="end">
@@ -131,10 +137,8 @@ const FormularioMedicamentos = (props:any) => {
                                     <IonButton color="primary" type="submit" class="ion-no-margin">{editionMode?'Guardar cambios':'Guardar'}</IonButton>
                                 </IonCol>
                                 <IonCol>
-                                    <IonButton color="danger" class="ion-no-margin">
-                                        <IonRouterLink color = "light" href = "/admin/homemedicamentos">
+                                    <IonButton routerLink="/admin/homemedicamentos" color="danger" class="ion-no-margin">
                                             Cancelar
-                                        </IonRouterLink>
                                     </IonButton>          
                                 </IonCol>
                             </IonRow>
@@ -200,7 +204,7 @@ const FormularioMedicamentos = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homemedicamentos');
+                            props.history.push('/admin/homemedicamentos');
                           }
                         }
                     ]}
@@ -242,7 +246,7 @@ const FormularioMedicamentos = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homemedicamentos');
+                            props.history.push('/admin/homemedicamentos');
                           }
                         }
                     ]}

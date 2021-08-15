@@ -7,12 +7,12 @@ import {
     IonAlert
 } from '@ionic/react';
 
-import { add } from 'ionicons/icons';
+import { add, arrowBackOutline } from 'ionicons/icons';
 import AxiosMedicamentos from '../../Services/AxiosMedicamentos';
 import ListaMedicamentos from './medicamentosComponents/ListaMedicamentos';
 import Respuesta from '../../components/Respuesta';
 
-const HomeMedicamentos = () => {
+const HomeMedicamentos = (props:any) => {
 
     const [medicamentos, setMedicamentos] = React.useState(new Array<any>());
     const [cargando, setCargando] = React.useState(false);
@@ -91,7 +91,13 @@ const HomeMedicamentos = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/admin"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/admin"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/admin">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons>
                 <IonTitle>Gestionar medicamentos</IonTitle>
                 <IonButtons slot="end">

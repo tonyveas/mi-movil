@@ -1,7 +1,7 @@
 import { IonPage, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonList, IonInput, IonText, IonTextarea, IonButton, IonRouterLink, IonAlert, IonLoading, useIonViewWillLeave, useIonViewWillEnter, IonIcon} from '@ionic/react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import {trash} from 'ionicons/icons';
+import {arrowBackOutline, trash} from 'ionicons/icons';
 import AxiosEnfermedades from '../../Services/AxiosEnfermedades';
 
 const FormularioEnfermedades = (props:any) => {
@@ -88,7 +88,13 @@ const FormularioEnfermedades = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/admin/homeenfermedades"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/admin/homeenfermedades"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin/homeenfermedades')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/admin/homeenfermedades">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons>
                 <IonTitle >  {editionMode?'Editar Enfermedad':'Registrar enfermedad'} </IonTitle>
                 <IonButtons slot="end">
@@ -142,10 +148,8 @@ const FormularioEnfermedades = (props:any) => {
                                     <IonButton color="primary" type="submit" class="ion-no-margin">{editionMode?'Guardar cambios':'Guardar'}</IonButton>
                                 </IonCol>
                                 <IonCol>
-                                    <IonButton color="danger" class="ion-no-margin">
-                                        <IonRouterLink color = "light" href = "/admin/formularioenfermedades">
+                                    <IonButton routerLink = "/admin/homeenfermedades" color="danger" class="ion-no-margin">
                                             Cancelar
-                                        </IonRouterLink>
                                     </IonButton>          
                                 </IonCol>
                             </IonRow>
@@ -211,7 +215,7 @@ const FormularioEnfermedades = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homeenfermedades');
+                            props.history.push('/admin/homeenfermedades');
                           }
                         }
                     ]}
@@ -253,7 +257,7 @@ const FormularioEnfermedades = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homeenfermedades');
+                            props.history.push('/admin/homeenfermedades');
                           }
                         }
                     ]}

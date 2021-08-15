@@ -14,13 +14,13 @@ import {
     IonAlert
 } from '@ionic/react';
 
-import { add } from 'ionicons/icons';
+import { add, arrowBackOutline } from 'ionicons/icons';
 
 import Respuesta from '../Respuesta';
 import AxiosRoles from '../../Services/AxiosRoles';
 import ListaRoles from './rolesComponents/ListaRoles';
 
-const HomeRoles = () => {
+const HomeRoles = (props:any) => {
 
     const [roles, setRoles] = React.useState(new Array<any>());
     const [cargando, setCargando] = React.useState(false);
@@ -100,11 +100,17 @@ const HomeRoles = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/admin"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/admin"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/admin">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons>
                 <IonTitle>Gestionar roles</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton routerLink="/admin/homeroles"><IonIcon icon={add}></IonIcon></IonButton>
+                    <IonButton routerLink="/admin/formularioroles"><IonIcon icon={add}></IonIcon></IonButton>
                 </IonButtons>
             </IonToolbar>
 

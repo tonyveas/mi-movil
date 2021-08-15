@@ -1,7 +1,7 @@
 import { IonPage, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonList, IonInput, IonText, IonTextarea, IonButton, IonRouterLink, IonAlert, IonLoading, useIonViewWillLeave, useIonViewWillEnter, IonIcon} from '@ionic/react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import {trash} from 'ionicons/icons';
+import {arrowBackOutline, trash} from 'ionicons/icons';
 import AxiosDiscapacidades from '../../Services/AxiosDiscapacidades';
 
 const FormularioDiscapacidades = (props:any) => {
@@ -86,12 +86,18 @@ const FormularioDiscapacidades = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/admin/homediscapacidades"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/admin/homediscapacidades"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin/homediscapacidades')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/admin/homediscapacidades">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons>
                 <IonTitle >  {editionMode?'Editar Discapacidad':'Registrar discapacidad'} </IonTitle>
-                <IonButtons slot="end">
+                {/* <IonButtons slot="end">
                     <IonButton hidden = {!editionMode?true:false} onClick = {() => setMostrarConfirmacionEliminar(true)} ><IonIcon icon={trash}></IonIcon></IonButton>
-                </IonButtons>
+                </IonButtons> */}
             </IonToolbar>
             <IonContent fullscreen>
                 <form onSubmit = {(e) => validar(e)}>
@@ -132,10 +138,8 @@ const FormularioDiscapacidades = (props:any) => {
                                     <IonButton color="primary" type="submit" class="ion-no-margin">{editionMode?'Guardar cambios':'Guardar'}</IonButton>
                                 </IonCol>
                                 <IonCol>
-                                    <IonButton color="danger" class="ion-no-margin">
-                                        <IonRouterLink color = "light" href = "/admin/homediscapacidades">
+                                    <IonButton routerLink="/admin/homemedicamentos" color="danger" class="ion-no-margin">
                                             Cancelar
-                                        </IonRouterLink>
                                     </IonButton>          
                                 </IonCol>
                             </IonRow>
@@ -201,7 +205,7 @@ const FormularioDiscapacidades = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homediscapacidades');
+                            props.history.push('/admin/homediscapacidades');
                           }
                         }
                     ]}
@@ -243,7 +247,7 @@ const FormularioDiscapacidades = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homediscapacidades');
+                            props.history.push('/admin/homediscapacidades');
                           }
                         }
                     ]}

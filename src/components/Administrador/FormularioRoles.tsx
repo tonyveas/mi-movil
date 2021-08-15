@@ -1,7 +1,7 @@
 import { IonPage, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonList, IonInput, IonText, IonTextarea, IonButton, IonRouterLink, IonAlert, IonLoading, useIonViewWillLeave, useIonViewWillEnter, IonIcon} from '@ionic/react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import {trash} from 'ionicons/icons';
+import {arrowBackOutline, trash} from 'ionicons/icons';
 import AxiosDiscapacidades from '../../Services/AxiosDiscapacidades';
 import AxiosRoles from '../../Services/AxiosRoles';
 
@@ -84,7 +84,13 @@ const FormularioRoles = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/admin/homeroles"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/admin/homeroles"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin/homeroles')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/admin/homeroles">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons> 
                 <IonTitle >  {editionMode?'Editar Rol':'Registrar rol'} </IonTitle>
                 <IonButtons slot="end">
@@ -122,10 +128,8 @@ const FormularioRoles = (props:any) => {
                                     <IonButton color="primary" type="submit" class="ion-no-margin">{editionMode?'Guardar cambios':'Guardar'}</IonButton>
                                 </IonCol>
                                 <IonCol>
-                                    <IonButton color="danger" class="ion-no-margin">
-                                        <IonRouterLink color = "light" href = "/admin/homeroles">
+                                    <IonButton routerLink = "/admin/homeroles" color="danger" class="ion-no-margin">
                                             Cancelar
-                                        </IonRouterLink>
                                     </IonButton>          
                                 </IonCol>
                             </IonRow>
@@ -191,7 +195,7 @@ const FormularioRoles = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homeroles');
+                            props.history.push('/admin/homeroles');
                           }
                         }
                     ]}
@@ -233,7 +237,7 @@ const FormularioRoles = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homeroles');
+                            props.history.push('/admin/homeroles');
                           }
                         }
                     ]}

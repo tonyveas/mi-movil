@@ -7,12 +7,12 @@ import {
     IonAlert
 } from '@ionic/react';
 
-import { add } from 'ionicons/icons';
+import { add, arrowBackOutline } from 'ionicons/icons';
 import Respuesta from '../Respuesta';
 import AxiosUsers from '../../Services/AxiosUsers';
 import ListaUsuarios from './usuariosComponents/ListaUsuarios';
 
-const HomeUsuarios = () => {
+const HomeUsuarios = (props:any) => {
 
     const [usuarios, setUsuarios] = React.useState(new Array<any>());
     const [cargando, setCargando] = React.useState(false);
@@ -91,11 +91,17 @@ const HomeUsuarios = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/admin"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/admin"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/admin">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons>
                 <IonTitle>Gestionar usuarios</IonTitle>
                 <IonButtons slot="end">
-                    <IonButton routerLink="/admin/homeusuarios"><IonIcon icon={add}></IonIcon></IonButton>
+                    <IonButton routerLink="/admin/formulariousuarios"><IonIcon icon={add}></IonIcon></IonButton>
                 </IonButtons>
             </IonToolbar>
 

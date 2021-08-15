@@ -1,7 +1,7 @@
 import { IonPage, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonList, IonInput, IonText, IonTextarea, IonButton, IonRouterLink, IonAlert, IonLoading, useIonViewWillLeave, useIonViewWillEnter, IonIcon, IonDatetime, IonSelect, IonSelectOption} from '@ionic/react'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import {eye, eyeOff, trash} from 'ionicons/icons';
+import {arrowBackOutline, eye, eyeOff, trash} from 'ionicons/icons';
 import AxiosUsers from '../../Services/AxiosUsers';
 import AxiosRoles from '../../Services/AxiosRoles';
 import '../../../src/components/style.css';
@@ -165,7 +165,13 @@ const FormularioUsuarios = (props:any) => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/admin/homeusuarios"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/admin/homeusuarios"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin/homeusuarios')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/admin/homeusuarios">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons>
                 <IonTitle >  {editionMode?'Editar Usuario':'Registrar usuario'} </IonTitle>
                 <IonButtons slot="end">
@@ -302,10 +308,8 @@ const FormularioUsuarios = (props:any) => {
                                     <IonButton color="primary" type="submit" class="ion-no-margin">{editionMode?'Guardar cambios':'Guardar'}</IonButton>
                                 </IonCol>
                                 <IonCol>
-                                    <IonButton color="danger" class="ion-no-margin">
-                                        <IonRouterLink color = "light" href = "/admin/homeusuarios">
+                                    <IonButton routerLink="/admin/homeusuarios" color="danger" class="ion-no-margin">
                                             Cancelar
-                                        </IonRouterLink>
                                     </IonButton>          
                                 </IonCol>
                             </IonRow>
@@ -386,7 +390,7 @@ const FormularioUsuarios = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homeusuarios');
+                            props.history.push('/admin/homeusuarios');
                           }
                         }
                     ]}
@@ -428,7 +432,7 @@ const FormularioUsuarios = (props:any) => {
                         {
                           text: 'Aceptar',
                           handler: () => {
-                            props.history.push('/homeusuarios');
+                            props.history.push('/admin/homeusuarios');
                           }
                         }
                     ]}

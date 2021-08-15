@@ -14,13 +14,13 @@ import {
     IonAlert
 } from '@ionic/react';
 
-import { add } from 'ionicons/icons';
+import { add, arrowBackOutline } from 'ionicons/icons';
 
 import Respuesta from '../Respuesta';
 import AxiosEnfermedades from '../../Services/AxiosEnfermedades';
 import ListaEnfermedades from './enfermedadesComponents/ListaEnfermedades';
 
-const HomeEnfermedades = () => {
+const HomeEnfermedades = (props:any) => {
 
     const [enfermedades, setEnfermedades] = React.useState(new Array<any>());
     const [cargando, setCargando] = React.useState(false);
@@ -100,7 +100,13 @@ const HomeEnfermedades = () => {
         <IonPage>
             <IonToolbar color="primary">
                 <IonButtons slot="start">
-                    <IonBackButton defaultHref="/admin"></IonBackButton>
+                    {/* <IonBackButton defaultHref="/admin"></IonBackButton> */}
+                    {/* <IonButton onClick = {() => props.history.push('/admin')}>
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton> */}
+                    <IonButton routerLink="/admin">
+                        <IonIcon slot="icon-only" icon={arrowBackOutline} />
+                    </IonButton>
                 </IonButtons>
                 <IonTitle>Gestionar enfermedades</IonTitle>
                 <IonButtons slot="end">
