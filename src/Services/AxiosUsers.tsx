@@ -19,7 +19,7 @@ export default class AxiosUsers {
     }
 
     static obtener_usuario_por_cedula = (cedula:any) => {
-        return AxiosUsers.instanceAxios.post(`/obtener_usuario_por_cedula/`, cedula);
+        return AxiosUsers.instanceAxios.post(`/obtener_usuario_por_cedula`, cedula);
     }
 
     static actualizar_usuario_administrador = (user:any) => {
@@ -27,7 +27,7 @@ export default class AxiosUsers {
     }
 
     static obtener_perfil_por_cedula = (cedula:any) => {
-        return AxiosUsers.instanceAxios.post(`/obtener_perfil_por_cedula/`, cedula);
+        return AxiosUsers.instanceAxios.post(`/obtener_perfil_por_cedula`, cedula);
     }
 
     static actualizar_perfil = (perfil:any) => {

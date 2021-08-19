@@ -50,6 +50,10 @@ import HomeRoute from './Rutas/HomeRoute';
 import PrivateRouteMedico from './Rutas/PrivateRouteMedico';
 import PrivateRoutePaciente from './Rutas/PrivateRoutePaciente';
 import PrivateRouteCuidador from './Rutas/PrivateRouteCuidador';
+import HomeCuidador from './components/Cuidador/HomeCuidador';
+import HomePacientesCuidador from './components/Cuidador/HomePacientesCuidador';
+import HomePaciente from './components/Paciente/HomePaciente';
+import HomeCuidadoresPaciente from './components/Paciente/HomeCuidadoresPaciente';
 
  
 const App: React.FC = () => {
@@ -93,11 +97,18 @@ const App: React.FC = () => {
             <PrivateRouteMedico exact path='/medico/perfil/:ced' component={FormularioPerfiles}/>
 
             {/* Paciente */}
+            {/* <PrivateRouteCuidador exact path='/paciente/homecuidadores' component={HomePacientesCuidador}/> */}
             <PrivateRoutePaciente exact path='/paciente/perfil/:ced' component={FormularioPerfiles} />
+            <PrivateRoutePaciente exact path='/paciente' component={HomePaciente} />
+            <PrivateRoutePaciente exact path='/paciente/homecuidadores' component={HomeCuidadoresPaciente} />
+
+            {/* <PrivateRouteCuidador exact path='/paciente' component={HomePaciente}/> */}
+
 
             {/* Cuidador */}
-            <PrivateRouteCuidador exact path='/paciente/perfil/:ced' component={FormularioPerfiles}/>
-
+            <PrivateRouteCuidador exact path='/cuidador' component={HomeCuidador}/>
+            <PrivateRouteCuidador exact path='/cuidador/perfil/:ced' component={FormularioPerfiles}/>
+            <PrivateRouteCuidador exact path='/cuidador/homepacientes' component={HomePacientesCuidador}/>
 
           </IonRouterOutlet>
         </IonSplitPane>

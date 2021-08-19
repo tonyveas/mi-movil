@@ -107,7 +107,7 @@ const FormularioEnfermedades = (props:any) => {
                         <IonGrid>
                             <IonRow class="ion-text-center">
                                 <IonCol>
-                                    <img style={{marginTop: 20, marginBottom:20 }} src="./assets/img/icons/medicinas/medicina.png"  alt="medicina" />
+                                    <img style={{marginTop: 20, marginBottom:20 }} src="./assets/img/icons/enfermedades/enfermedad.png"  alt="medicina" />
                                 </IonCol>
                             </IonRow>
                             <IonRow>
