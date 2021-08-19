@@ -141,7 +141,7 @@ const HomePacientesCuidador = (props:any) => {
                     {/* <IonButton onClick = {() => props.history.push('/admin')}>
                         <IonIcon slot="icon-only" icon={arrowBackOutline} />
                     </IonButton> */}
-                    <IonButton routerLink="/medico">
+                    <IonButton routerLink="/cuidador">
                         <IonIcon slot="icon-only" icon={arrowBackOutline} />
                     </IonButton>
                 </IonButtons>
