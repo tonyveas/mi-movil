@@ -27,6 +27,8 @@ const HomePacientesCuidador = (props:any) => {
     const [pageIndex, setPageIndex] = React.useState(0);
     const [mostrarConfirmacion, setMostrarConfirmacion] = React.useState(false);
     const [mostrarLoad, setMostrarLoad] = React.useState(false);
+    const [mostrarLoad2, setMostrarLoad2] = React.useState(false);
+
     const [alerta, setAlerta] = React.useState(false);
     const [cedula, setCedula] = React.useState("");
     const [mostrarModal,setMostrarModal] = React.useState(false);
@@ -46,9 +48,9 @@ const HomePacientesCuidador = (props:any) => {
     }
 
     const eliminar = () => {
-        setMostrarLoad(true);
+        setMostrarLoad2(true);
         AxiosPersonas.deletePacienteAsociadoCuidador({paciente: cedula, cuidador: Auth.getDataUser().cedula}).then( res => {
-            setMostrarLoad(false);
+            setMostrarLoad2(false);
             //setMostrarModal(false);
             setAlerta(true);
             cargar_pacientes(true, "", true);
@@ -245,6 +247,11 @@ const HomePacientesCuidador = (props:any) => {
             <IonLoading
                 isOpen={mostrarLoad}
                 message={'Asociando paciente. Espere por favor...'}
+            />
+
+            <IonLoading
+                isOpen={mostrarLoad2}
+                message={'Quitando paciente. Espere por favor...'}
             />
 
             <IonAlert

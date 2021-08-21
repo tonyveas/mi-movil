@@ -13,7 +13,9 @@ import {
     IonButton,
     useIonViewWillEnter,
     IonIcon,
-    IonBadge
+    IonBadge,
+    IonToast,
+    IonLoading
   } from '@ionic/react';
   import React from 'react';
   import './Home.css';
@@ -24,18 +26,33 @@ import {
 //   import AxiosRecordatorios from '../services/AxiosRecordatorios';
   import { useState} from 'react';
   import { notifications } from 'ionicons/icons';
-  
+import Auth from '../Login/Auth';
+import AxiosCitas from '../Services/AxiosCitas';
+
   //import MenuLateral from '../components/Menu_Lateral';
   
   
   const HomeMedico: React.FC = (props) => {
     
-    const [cantidad, setCantidad] = useState("");
-  
-    // useIonViewWillEnter(() => {
-    //   console.log('ionViewWillEnter event fired');
-    // });
-  
+    const [cantidad, setCantidad] = useState(0);
+    const [mostrarAlerta, setMostrarAlerta] = useState(false);
+    const [cargando, setCargando] = React.useState(false);
+    
+    useIonViewWillEnter(() => {
+      console.log('ionViewWillEnter event fired');
+      cargar_recordatorios();
+    });
+
+    const cargar_recordatorios = () => {
+      setCargando(true)
+      AxiosCitas.citas_recordatorios_medico({"cedula": Auth.getDataUser().cedula}).then( res => {
+        console.log("citas_recordatorios_medico: ",(res.data).length);
+        setCantidad((res.data).length);
+        setCargando(false);
+        setMostrarAlerta(true);
+      });
+    }
+    
     return (
       <IonPage>
         <IonHeader>
@@ -44,6 +61,9 @@ import {
             <IonMenuButton/>
             </IonButtons>
             <IonTitle>Bienvenido</IonTitle>
+            <IonButtons slot="end">
+              <IonButton shape="round" slot="end" size="large" routerLink="/medico/recordatorios"><IonIcon icon={notifications}></IonIcon><IonBadge color="light">{cantidad}</IonBadge></IonButton>
+            </IonButtons>
             {/* <IonButtons slot="end">
     <IonButton shape="round" slot="end" size="large" routerLink="/recordatoriosactualeshome"><IonIcon icon={notifications}></IonIcon><IonBadge color="light">{cantidad}</IonBadge></IonButton>
             </IonButtons> */}
@@ -79,6 +99,26 @@ import {
               </IonCol>
             </IonRow> */}
           </IonGrid>
+          <IonToast
+            isOpen={mostrarAlerta}
+            onDidDismiss={() => setMostrarAlerta(false)}
+            message={cantidad>1?"Tiene citas pendientes, revisar por favor":"Tiene una cita pendiente, revisar por favor"}
+            //duration={800}
+            buttons={[
+              {
+                text: 'Ok',
+                handler: () => {
+                  setMostrarAlerta(false);
+                }
+              }
+            ]}
+            position="top"
+            color="success"
+          />
+          <IonLoading
+            isOpen={cargando}
+            message={'Cargando datos. Espere por favor...'}
+          />
         </IonContent>
       </IonPage>
     );

@@ -54,6 +54,9 @@ import HomeCuidador from './components/Cuidador/HomeCuidador';
 import HomePacientesCuidador from './components/Cuidador/HomePacientesCuidador';
 import HomePaciente from './components/Paciente/HomePaciente';
 import HomeCuidadoresPaciente from './components/Paciente/HomeCuidadoresPaciente';
+import RecordatoriosMedicos from './components/Medico/RecordatoriosMedicos';
+import RecordatoriosPacientes from './components/Paciente/RecordatoriosPacientes';
+import RecordatoriosCuidadores from './components/Cuidador/RecordatoriosCuidadores';
 
  
 const App: React.FC = () => {
@@ -95,12 +98,15 @@ const App: React.FC = () => {
             <PrivateRouteMedico exact path='/medico/homepacientes/expedientepaciente/:ced' component={ExpedientePaciente}/>
             <PrivateRouteMedico exact path='/medico/citaanterior/paciente/:id/:ced' component={VisualizarCita}/>
             <PrivateRouteMedico exact path='/medico/perfil/:ced' component={FormularioPerfiles}/>
+            <PrivateRouteMedico exact path='/medico/recordatorios' component={RecordatoriosMedicos}/>
 
             {/* Paciente */}
             {/* <PrivateRouteCuidador exact path='/paciente/homecuidadores' component={HomePacientesCuidador}/> */}
             <PrivateRoutePaciente exact path='/paciente/perfil/:ced' component={FormularioPerfiles} />
             <PrivateRoutePaciente exact path='/paciente' component={HomePaciente} />
             <PrivateRoutePaciente exact path='/paciente/homecuidadores' component={HomeCuidadoresPaciente} />
+            <PrivateRoutePaciente exact path='/paciente/recordatorios' component={RecordatoriosPacientes} />
+
 
             {/* <PrivateRouteCuidador exact path='/paciente' component={HomePaciente}/> */}
 
@@ -109,6 +115,8 @@ const App: React.FC = () => {
             <PrivateRouteCuidador exact path='/cuidador' component={HomeCuidador}/>
             <PrivateRouteCuidador exact path='/cuidador/perfil/:ced' component={FormularioPerfiles}/>
             <PrivateRouteCuidador exact path='/cuidador/homepacientes' component={HomePacientesCuidador}/>
+            <PrivateRouteCuidador exact path='/cuidador/recordatorios' component={RecordatoriosCuidadores}/>
+
 
           </IonRouterOutlet>
         </IonSplitPane>
