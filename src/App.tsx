@@ -61,6 +61,9 @@ import AgendaCitas from './components/Cita/agendadoCita';
 import FormAgendaCitas from './components/Cita/formAgendadoCita';
 import FormAgendaCitasPaciente from './components/Cita/formAgendadoCitaPaciente';
 import FormAgendaCitasCuidador from './components/Cita/formAgendadoCitaCuidador';
+import RecordatoriosMedicos from './components/Medico/RecordatoriosMedicos';
+import RecordatoriosPacientes from './components/Paciente/RecordatoriosPacientes';
+import RecordatoriosCuidadores from './components/Cuidador/RecordatoriosCuidadores';
 
 const App: React.FC = () => {
   return (
@@ -104,6 +107,7 @@ const App: React.FC = () => {
             <PrivateRouteMedico exact path='/medico/homepacientes/expedientepaciente/:ced' component={ExpedientePaciente}/>
             <PrivateRouteMedico exact path='/medico/citaanterior/paciente/:id/:ced' component={VisualizarCita}/>
             <PrivateRouteMedico exact path='/medico/perfil/:ced' component={FormularioPerfiles}/>
+            <PrivateRouteMedico exact path='/medico/recordatorios' component={RecordatoriosMedicos}/>
 
             {/* Paciente */}
             {/* <PrivateRouteCuidador exact path='/paciente/homecuidadores' component={HomePacientesCuidador}/> */}
@@ -114,6 +118,8 @@ const App: React.FC = () => {
             <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas/edit/:id' component={FormAgendaCitasPaciente}/>
             {/* <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas/:id' component={FormAgendaCitas}/> */}
             <PrivateRoutePaciente exact path='/paciente/homecuidadores' component={HomeCuidadoresPaciente} />
+            <PrivateRoutePaciente exact path='/paciente/recordatorios' component={RecordatoriosPacientes} />
+
 
             {/* <PrivateRouteCuidador exact path='/paciente' component={HomePaciente}/> */}
 
@@ -125,6 +131,8 @@ const App: React.FC = () => {
             <PrivateRouteCuidadorCC exact path='/cuidador/formAgendaCitas/edit/:id' component={FormAgendaCitasCuidador}/>
             <PrivateRouteCuidador exact path='/cuidador/perfil/:ced' component={FormularioPerfiles}/>
             <PrivateRouteCuidador exact path='/cuidador/homepacientes' component={HomePacientesCuidador}/>
+            <PrivateRouteCuidador exact path='/cuidador/recordatorios' component={RecordatoriosCuidadores}/>
+
 
           </IonRouterOutlet>
         </IonSplitPane>
