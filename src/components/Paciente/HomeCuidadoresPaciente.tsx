@@ -159,6 +159,7 @@ const HomeCuidadoresPaciente = (props:any) => {
 
             <IonContent>
                 {
+                    
                     cuidadores.length === 0? <Respuesta />:null
                 }
                 <IonRefresher slot="fixed" onIonRefresh={ (e:any) => loading(e,0) }>

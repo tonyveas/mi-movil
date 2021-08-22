@@ -15,6 +15,10 @@ export default class AxiosCitas {
         return AxiosCitas.instanceAxios.post(`/getCitasPaciente`, filter);
     }
 
+    static getCitaByID = (filter:any) => {
+        return AxiosCitas.instanceAxios.post(`/getCitaByID`, filter);
+    }
+
     static getCitasMedico = (filter:any) => {
         return AxiosCitas.instanceAxios.post(`/getCitasMedico`, filter);
     }
@@ -35,4 +39,7 @@ export default class AxiosCitas {
         return AxiosCitas.instanceAxios.post(`/actualizar_cita`, informacion_cita);
     }
 
+    static getCitasCuidador = (filter: any) => {
+        return AxiosCitas.instanceAxios.post(`/getCitasCuidador`, filter);
+    }
 }

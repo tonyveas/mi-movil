@@ -60,11 +60,20 @@ import {
                 </IonButton>
               </IonCol>
             </IonRow> */}
-            <IonRow style = {{marginTop:180}} class="row">
+            <IonRow  class="row">
               <IonCol  size="12">     
                 <IonButton color="primary" class="boton" routerLink="/cuidador/homepacientes" expand="block" size="large">
                 <div className="margen">
                   <img src={process.env.PUBLIC_URL + "/assets/img/main/img2/paciente.png"} className="responsive" alt="" /><br/><br/><IonLabel>Pacientes</IonLabel>   
+                </div>  
+                </IonButton>
+              </IonCol>
+            </IonRow>
+            <IonRow  class="row">
+              <IonCol  size="12">     
+                <IonButton color="primary" class="boton" routerLink="/cuidador/agendaCitas" expand="block" size="large">
+                <div className="margen">
+                  <img src={process.env.PUBLIC_URL + "/assets/img/main/inventory.png"} className="responsive" alt="" /><br/><br/><IonLabel>Agendado de Citas</IonLabel>   
                 </div>  
                 </IonButton>
               </IonCol>

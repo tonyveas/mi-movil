@@ -48,14 +48,20 @@ import PublicRoute from './Rutas/PublicRoute';
 import PrivateRouteAdmin from './Rutas/PrivateRouteAdmin';
 import HomeRoute from './Rutas/HomeRoute';
 import PrivateRouteMedico from './Rutas/PrivateRouteMedico';
+import PrivateRouteMedicoCC from './Rutas/PrivateRouteMedicoCC';
 import PrivateRoutePaciente from './Rutas/PrivateRoutePaciente';
+import PrivateRoutePacienteCC from './Rutas/PrivateRoutePacienteCC';
 import PrivateRouteCuidador from './Rutas/PrivateRouteCuidador';
+import PrivateRouteCuidadorCC from './Rutas/PrivateRouteCuidadorCC';
 import HomeCuidador from './components/Cuidador/HomeCuidador';
 import HomePacientesCuidador from './components/Cuidador/HomePacientesCuidador';
 import HomePaciente from './components/Paciente/HomePaciente';
 import HomeCuidadoresPaciente from './components/Paciente/HomeCuidadoresPaciente';
+import AgendaCitas from './components/Cita/agendadoCita';
+import FormAgendaCitas from './components/Cita/formAgendadoCita';
+import FormAgendaCitasPaciente from './components/Cita/formAgendadoCitaPaciente';
+import FormAgendaCitasCuidador from './components/Cita/formAgendadoCitaCuidador';
 
- 
 const App: React.FC = () => {
   return (
     <IonApp>
@@ -89,6 +95,9 @@ const App: React.FC = () => {
 
             {/* Médico */}
             <PrivateRouteMedico exact path='/medico' component={HomeMedico}/>
+            <PrivateRouteMedicoCC exact path='/medico/AgendaCitas' component={AgendaCitas}/>
+            <PrivateRouteMedicoCC exact path='/medico/formAgendaCitas' component={FormAgendaCitas}/>
+            <PrivateRouteMedicoCC exact path='/medico/formAgendaCitas/edit/:id' component={FormAgendaCitas}/>
             {/* <PrivateRouteMedico exact path='/medico/atenderCita' component={AtenderCita}/>
             <PrivateRouteMedico exact path='/medico/atenderCita/:id' component={AtenderCita}/> */}
             <PrivateRouteMedico exact path='/medico/homepacientes' component={HomePacientes}/>
@@ -100,6 +109,10 @@ const App: React.FC = () => {
             {/* <PrivateRouteCuidador exact path='/paciente/homecuidadores' component={HomePacientesCuidador}/> */}
             <PrivateRoutePaciente exact path='/paciente/perfil/:ced' component={FormularioPerfiles} />
             <PrivateRoutePaciente exact path='/paciente' component={HomePaciente} />
+            <PrivateRoutePacienteCC exact path='/paciente/AgendaCitas' component={AgendaCitas}/>
+            <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas' component={FormAgendaCitasPaciente}/>
+            <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas/edit/:id' component={FormAgendaCitasPaciente}/>
+            {/* <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas/:id' component={FormAgendaCitas}/> */}
             <PrivateRoutePaciente exact path='/paciente/homecuidadores' component={HomeCuidadoresPaciente} />
 
             {/* <PrivateRouteCuidador exact path='/paciente' component={HomePaciente}/> */}
@@ -107,6 +120,9 @@ const App: React.FC = () => {
 
             {/* Cuidador */}
             <PrivateRouteCuidador exact path='/cuidador' component={HomeCuidador}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/AgendaCitas' component={AgendaCitas}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/formAgendaCitas' component={FormAgendaCitasCuidador}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/formAgendaCitas/edit/:id' component={FormAgendaCitasCuidador}/>
             <PrivateRouteCuidador exact path='/cuidador/perfil/:ced' component={FormularioPerfiles}/>
             <PrivateRouteCuidador exact path='/cuidador/homepacientes' component={HomePacientesCuidador}/>
 
