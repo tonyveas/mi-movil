@@ -64,6 +64,12 @@ import FormAgendaCitasCuidador from './components/Cita/formAgendadoCitaCuidador'
 import RecordatoriosMedicos from './components/Medico/RecordatoriosMedicos';
 import RecordatoriosPacientes from './components/Paciente/RecordatoriosPacientes';
 import RecordatoriosCuidadores from './components/Cuidador/RecordatoriosCuidadores';
+import HomeSeguimientos from './components/seguimientos/HomeSeguimientos';
+import IndexSeguimientos from './components/seguimientos/IndexSeguimiento';
+import InfoMedica from './components/seguimientos/InfoMedica';
+import FormInfoMedica from './components/seguimientos/FormInfoMedica';
+import CitasAsociadas from './components/seguimientos/CitasAsocidas';
+import FormCitasAsociadas from './components/seguimientos/FormCitaAsociada';
 
 const App: React.FC = () => {
   return (
@@ -101,6 +107,14 @@ const App: React.FC = () => {
             <PrivateRouteMedicoCC exact path='/medico/AgendaCitas' component={AgendaCitas}/>
             <PrivateRouteMedicoCC exact path='/medico/formAgendaCitas' component={FormAgendaCitas}/>
             <PrivateRouteMedicoCC exact path='/medico/formAgendaCitas/edit/:id' component={FormAgendaCitas}/>
+            <PrivateRouteMedicoCC exact path='/medico/seguimientos' component={HomeSeguimientos}/>
+            <PrivateRouteMedicoCC exact path='/medico/seguimiento/:id' component={IndexSeguimientos}/>
+            <PrivateRouteMedicoCC exact path='/medico/seguimiento/infomedica/:id' component={InfoMedica}/>
+            <PrivateRouteMedicoCC exact path='/medico/seguimiento/infomedica/create/:seguimiento/:medico/:paciente' component={FormInfoMedica}/>
+            <PrivateRouteMedicoCC exact path='/medico/seguimiento/infomedica/edit/:id/:seguimiento' component={FormInfoMedica}/>
+            <PrivateRouteMedicoCC exact path='/medico/seguimiento/citasasociadas/:id' component={CitasAsociadas}/>
+            <PrivateRouteMedicoCC exact path='/medico/seguimiento/citasasociadas/create/:seguimiento/:medico/:paciente' component={FormCitasAsociadas}/>
+
             {/* <PrivateRouteMedico exact path='/medico/atenderCita' component={AtenderCita}/>
             <PrivateRouteMedico exact path='/medico/atenderCita/:id' component={AtenderCita}/> */}
             <PrivateRouteMedico exact path='/medico/homepacientes' component={HomePacientes}/>
@@ -116,6 +130,14 @@ const App: React.FC = () => {
             <PrivateRoutePacienteCC exact path='/paciente/AgendaCitas' component={AgendaCitas}/>
             <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas' component={FormAgendaCitasPaciente}/>
             <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas/edit/:id' component={FormAgendaCitasPaciente}/>
+            <PrivateRoutePacienteCC exact path='/paciente/seguimientos' component={HomeSeguimientos}/>
+            <PrivateRoutePacienteCC exact path='/paciente/seguimiento/:id' component={IndexSeguimientos}/>
+            <PrivateRoutePacienteCC exact path='/paciente/seguimiento/infomedica/:id' component={InfoMedica}/>
+            <PrivateRoutePacienteCC exact path='/paciente/seguimiento/infomedica/create/:seguimiento/:medico/:paciente' component={FormInfoMedica}/>
+            <PrivateRoutePacienteCC exact path='/paciente/seguimiento/infomedica/edit/:id/:seguimiento' component={FormInfoMedica}/>
+            <PrivateRoutePacienteCC exact path='/paciente/seguimiento/citasasociadas/:id' component={CitasAsociadas}/>
+            <PrivateRoutePacienteCC exact path='/paciente/seguimiento/citasasociadas/create/:seguimiento/:medico/:paciente' component={FormCitasAsociadas}/>
+
             {/* <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas/:id' component={FormAgendaCitas}/> */}
             <PrivateRoutePaciente exact path='/paciente/homecuidadores' component={HomeCuidadoresPaciente} />
             <PrivateRoutePaciente exact path='/paciente/recordatorios' component={RecordatoriosPacientes} />
@@ -129,6 +151,13 @@ const App: React.FC = () => {
             <PrivateRouteCuidadorCC exact path='/cuidador/AgendaCitas' component={AgendaCitas}/>
             <PrivateRouteCuidadorCC exact path='/cuidador/formAgendaCitas' component={FormAgendaCitasCuidador}/>
             <PrivateRouteCuidadorCC exact path='/cuidador/formAgendaCitas/edit/:id' component={FormAgendaCitasCuidador}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/seguimientos' component={HomeSeguimientos}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/:id' component={IndexSeguimientos}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/infomedica/:id' component={InfoMedica}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/infomedica/create/:seguimiento/:medico/:paciente' component={FormInfoMedica}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/infomedica/edit/:id/:seguimiento' component={FormInfoMedica}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/citasasociadas/:id' component={CitasAsociadas}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/citasasociadas/create/:seguimiento/:medico/:paciente' component={FormCitasAsociadas}/>
             <PrivateRouteCuidador exact path='/cuidador/perfil/:ced' component={FormularioPerfiles}/>
             <PrivateRouteCuidador exact path='/cuidador/homepacientes' component={HomePacientesCuidador}/>
             <PrivateRouteCuidador exact path='/cuidador/recordatorios' component={RecordatoriosCuidadores}/>
