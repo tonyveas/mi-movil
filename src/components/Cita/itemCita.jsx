@@ -77,46 +77,46 @@ export default class ItemCitas extends React.Component {
                                 <img style={{ marginLeft: 150, marginTop: 25, marginBottom: 25 }} src="./assets/img/icons/usuarios/usuario.png" alt="usuario" />
                             </IonItem>
                             {Auth.isMedico() ? <IonItem>
-                                <IonIcon slot="start" icon={key}></IonIcon>
+                                <IonIcon slot="start" icon={reader}></IonIcon>
                                 <IonLabel>Paciente</IonLabel>
                                 <IonNote slot="end">{props.nombre} {props.apellido}</IonNote>
                             </IonItem> : null}
                             {Auth.isPaciente() ? <div>
                                 <IonItem>
-                                    <IonIcon slot="start" icon={key}></IonIcon>
+                                    <IonIcon slot="start" icon={reader}></IonIcon>
                                     <IonLabel>Médico</IonLabel>
                                     <IonNote slot="end">{props.nombre} {props.apellido}</IonNote>
                                 </IonItem>
                                 <IonItem>
-                                    <IonIcon slot="start" icon={key}></IonIcon>
+                                    <IonIcon slot="start" icon={reader}></IonIcon>
                                     <IonLabel>Especialidad</IonLabel>
                                     <IonNote slot="end">{props.especialidad}</IonNote>
                                 </IonItem>
                             </div> : null}
                             {Auth.isCuidador() ? <div>
                                 <IonItem>
-                                    <IonIcon slot="start" icon={key}></IonIcon>
+                                    <IonIcon slot="start" icon={reader}></IonIcon>
                                     <IonLabel>Médico</IonLabel>
                                     <IonNote slot="end">{props.nombreMedico} {props.apellidoMedico}</IonNote>
                                 </IonItem>
                                 <IonItem>
-                                    <IonIcon slot="start" icon={key}></IonIcon>
+                                    <IonIcon slot="start" icon={reader}></IonIcon>
                                     <IonLabel>Cedula Médico</IonLabel>
                                     <IonNote slot="end">{props.cedulaMedico}</IonNote>
                                 </IonItem>
                                 <IonItem>
-                                    <IonIcon slot="start" icon={key}></IonIcon>
+                                    <IonIcon slot="start" icon={reader}></IonIcon>
                                     <IonLabel>Paciente</IonLabel>
                                     <IonNote slot="end">{props.nombrePaciente} {props.apellidoPaciente}</IonNote>
                                 </IonItem>
                                 <IonItem>
-                                    <IonIcon slot="start" icon={key}></IonIcon>
+                                    <IonIcon slot="start" icon={reader}></IonIcon>
                                     <IonLabel>Cedula Paciente</IonLabel>
                                     <IonNote slot="end">{props.cedulaMedico}</IonNote>
                                 </IonItem>
                             </div> : null}
                             {Auth.isPaciente() || Auth.isMedico() ? <IonItem>
-                                <IonIcon slot="start" icon={key}></IonIcon>
+                                <IonIcon slot="start" icon={reader}></IonIcon>
                                 <IonLabel>Cedula</IonLabel>
                                 <IonNote slot="end">{props.cedula}</IonNote>
                             </IonItem> : null}
@@ -131,7 +131,7 @@ export default class ItemCitas extends React.Component {
                                 <IonNote slot="end">{props.end}</IonNote>
                             </IonItem>
                             <IonItem>
-                                <IonIcon slot="start" icon={key}></IonIcon>
+                                <IonIcon slot="start" icon={reader}></IonIcon>
                                 <IonLabel>Estado</IonLabel>
                                 <IonNote slot="end">{props.estado === "P" ? "Pendiente" : props.estado === "C" ? "Cancelada" : "Atendida"}</IonNote>
                             </IonItem>

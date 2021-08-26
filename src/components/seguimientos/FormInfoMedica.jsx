@@ -2,29 +2,22 @@ import { IonPage, IonToolbar, IonButtons, IonDatetime, IonSelectOption, IonSelec
 import React from 'react'
 import { arrowBackOutline, trash } from 'ionicons/icons';
 import Auth from '../../Login/Auth';
-import AxiosPersonas from '../../Services/AxiosPersonas';
-import AxiosCitas from '../../Services/AxiosCitas';
+import {FileChooser} from "@ionic-native/file-chooser";
+import {FilePath} from "@ionic-native/file-path";
+import AxiosSignosVitales from '../../Services/AxiosSignosVitales';
 
-export default class FormAgendadoCita extends React.Component {
+export default class FormInfoMedica extends React.Component {
+
     constructor(props) {
         super(props);
 
         this.state = {
-            cita: {},
+            signo: {},
             editMode: null,
-            medicos: []
+            items: ["Estatura", "Peso", "Masa Coporal", "Porcentaje de grasa corporal", "Masa muscular", "Tensión arterial", "Frecuencia cardíaca", "Frecuencia respiratoria", "Saturación de oxígeno", "Temperatura"],
+
         }
 
-    }
-
-    processCitaData() {
-        let date = new Date(this.state.cita.date).toISOString();
-        let start = new Date(this.state.cita.start).toISOString();
-        let end = new Date(this.state.cita.end).toISOString();
-        let paciente = Auth.getDataUser().cedula;
-        let inicio_cita = date.split("T")[0] + "T" + start.split("T")[1];
-        let fin_cita = date.split("T")[0] + "T" + end.split("T")[1];
-        return { fin_cita, inicio_cita, paciente, estado: "P" }
     }
 
     getRoute(posFix = "") {
@@ -33,66 +26,62 @@ export default class FormAgendadoCita extends React.Component {
         return "/cuidador" + posFix;
     }
 
+    // selectFile(){
+    //     FileChooser.open().then(fileuri=>{
+    //         FilePath.resolveNativePath(fileuri).then(nativepath => {
+
+    //         })
+    //     })
+    // }
+
     componentDidMount() {
-        this.setState({ editMode: this.props.match.params.id }, () => {
+        this.setState({ editMode: this.props.match.params.id, ...this.props.match.params }, () => {
             if (this.state.editMode) {
-                this.getCitaByID();
+                this.getInfoMedicaByID();
             }
         })
-        this.getMedicos();
     }
 
-    getMedicos = () => {
-        this.setState({ fetchingPacientes: true, pacientes: [] });
-        AxiosPersonas.getMedicosFilter("").then(resp => {
+    saveSignoVital() {
+        this.setState({ loadingSave: true });
+        AxiosSignosVitales.saveSignosVitales({ ...this.state.signo, seguimiento: this.state.seguimiento, paciente: this.state.paciente, medico: this.state.medico, isPaciente: Auth.isPaciente() }).then(resp => {
             console.log(resp);
-            this.setState({ fetchingPacientes: false, medicos: resp.data });
-        }).catch(err => {
-            this.setState({ fetchingPacientes: false });
-            console.log(err);
+            this.setState({ loadingSave: false, alerta: true });
+        }).catch(error => {
+            console.log(error);
+            this.setState({ loadingSave: false });
         });
     }
 
-    saveCita() {
-        this.setState({ loading: true });
-        console.log({ ...this.state.cita, ...this.processCitaData() })
-        AxiosCitas.agendarCita({ ...this.state.cita, ...this.processCitaData() }).then(resp => {
+    editSignoVital() {
+        this.setState({ loadingSave: true });
+        AxiosSignosVitales.editSignosVitales({ ...this.state.signo, id_info_medica: this.props.match.params.id }).then(resp => {
             console.log(resp);
-            this.setState({ loading: false, alerta: true, cita: {} });
-        }).catch(err => {
-            console.log(err);
-            this.setState({ loading: false });
-        });
-    }
-
-    updateCita() {
-        this.setState({ loading: true });
-        AxiosCitas.reangedarCancelarCita({ ...this.state.cita, ...this.processCitaData() }).then(resp => {
-            console.log(resp);
-            this.setState({ loading: false, alerta: true, cita: {} });
-        }).catch(err => {
-            console.log(err);
-            this.setState({ loading: false });
-        });
-    }
-
-    getCitaByID() {
-        this.setState({ isLoadingGet: true });
-        AxiosCitas.getCitaByID({ id: this.props.match.params.id }).then(resp => {
-            console.log(resp);
-            this.setState({ cita: resp.data, isLoadingGet: false });
-        }).catch(err => {
-            console.log(err);
-            this.setState({ isLoadingGet: false });
+            this.setState({ loadingSave: false, alerta: true });
+        }).catch(error => {
+            console.log(error);
+            this.setState({ loadingSave: false });
         });
     }
 
     handleChange(e) {
         this.setState({
-            cita: {
-                ...this.state.cita,
+            signo: {
+                ...this.state.signo,
                 [e.target.name]: e.target.value
             }
+        });
+    }
+
+
+    getInfoMedicaByID() {
+        this.setState({ isLoadingGet: true });
+        AxiosSignosVitales.getInfoMedicaByID({ id: this.props.match.params.id }).then(resp => {
+            console.log(resp);
+            this.setState({ signo: resp.data, isLoadingGet: false });
+        }).catch(err => {
+            console.log(err);
+            this.setState({ isLoadingGet: false });
         });
     }
 
@@ -103,15 +92,15 @@ export default class FormAgendadoCita extends React.Component {
                 <IonToolbar color="primary">
                     <IonButtons slot="start">
 
-                        <IonButton routerLink={this.getRoute("/agendaCitas")}>
+                        <IonButton routerLink={this.getRoute("/seguimiento/infomedica/") + this.props.match.params.seguimiento}>
                             <IonIcon slot="icon-only" icon={arrowBackOutline} />
                         </IonButton>
                     </IonButtons>
-                    <IonTitle >  {this.state.editMode ? 'Editar Cita' : 'Agendar Cita'} </IonTitle>
+                    <IonTitle >  {this.state.editMode ? 'Editar Signo Vital' : 'Registrar Signo Vital'} </IonTitle>
                 </IonToolbar>
 
                 <IonContent fullscreen>
-                    <form onSubmit={(e) => { e.preventDefault(); console.log(this.state.cita); this.setState({ confirmSave: true }) }}>
+                    <form onSubmit={(e) => { e.preventDefault(); this.setState({ confirmSave: true }) }}>
                         <IonList>
                             <IonGrid>
                                 <IonRow class="ion-text-center">
@@ -123,10 +112,10 @@ export default class FormAgendadoCita extends React.Component {
                                 <IonRow >
                                     <IonCol>
                                         <IonItem>
-                                            <IonSelect disabled={this.state.editMode} name="medico" placeholder="Seleccione al Medico" value={this.state.cita.medico} cancelText="Cancelar" okText="Aceptar" onIonChange={e => this.handleChange(e)}>
+                                            <IonSelect disabled={this.state.editMode} name="key" placeholder="Seleccione el Signo Vital" value={this.state.signo.key} cancelText="Cancelar" okText="Aceptar" onIonChange={e => this.handleChange(e)}>
                                                 {
-                                                    this.state.medicos.map((item) => (
-                                                        <IonSelectOption key={item.cedula} value={item.cedula}>{item.nombre + " " + item.apellido + " - " + item.especialidad}</IonSelectOption>
+                                                    this.state.items.map((item) => (
+                                                        <IonSelectOption key={item} value={item}>{item}</IonSelectOption>
                                                     ))
                                                 }
                                             </IonSelect>
@@ -138,41 +127,46 @@ export default class FormAgendadoCita extends React.Component {
                                 <IonRow>
                                     <IonCol>
                                         <IonItem>
-                                            <IonLabel position="stacked">Fecha de la Cita<IonText color="danger">*</IonText></IonLabel>
-                                            <IonDatetime onIonChange={e => this.handleChange(e)} name="date" value={this.state.cita.date ? this.state.cita.date : ""} placeholder="Seleccione una fecha"></IonDatetime>
+                                            <IonLabel position="stacked">Valor del Signo Vital<IonText color="danger">*</IonText></IonLabel>
+                                            <IonInput onIonChange={e => this.handleChange(e)} name="value" type="number" value={this.state.signo.value ? this.state.signo.value : ""} placeholder="Ingrese el valor del Signo Vital"></IonInput>
+                                        </IonItem>
+                                    </IonCol>
+                                </IonRow>
+                                {/* <IonRow>
+                                    <IonCol>
+                                        <IonItem>
+                                            <IonLabel position="stacked">filel<IonText color="danger">*</IonText></IonLabel>
+                                            <IonInput onIonChange={e => this.handleChange(e)} name="file" type="file" value={this.state.signo.file ? this.state.signo.file : ""} placeholder="Ingrese el valor del Signo Vital"></IonInput>
+                                        </IonItem>
+                                    </IonCol>
+                                </IonRow> */}
+                                <IonRow>
+                                    <IonCol>
+                                        <IonItem>
+                                            <IonLabel position="stacked">Unidad del signo vital<IonText color="danger">*</IonText></IonLabel>
+                                            <IonInput onIonChange={e => this.handleChange(e)} name="unidad" value={this.state.signo.unidad ? this.state.signo.unidad : ""} placeholder="Ingrese la unidad del signo vital"></IonInput>
                                         </IonItem>
                                     </IonCol>
                                 </IonRow>
                                 <IonRow>
                                     <IonCol>
                                         <IonItem>
-                                            <IonLabel position="stacked">Hora Inicio de la Cita<IonText color="danger">*</IonText></IonLabel>
-                                            <IonDatetime onIonChange={e => this.handleChange(e)} name="start" value={this.state.cita.start ? this.state.cita.start : ""} displayFormat="h:mm A" pickerFormat="h:mm A" placeholder="Seleccione una hora"></IonDatetime>
-                                        </IonItem>
-                                    </IonCol>
-                                </IonRow>
-                                <IonRow>
-                                    <IonCol>
-                                        <IonItem>
-                                            <IonLabel position="stacked">Hoa Fin de la Cita<IonText color="danger">*</IonText></IonLabel>
-                                            <IonDatetime onIonChange={e => this.handleChange(e)} name="end" value={this.state.cita.end ? this.state.cita.end : ""} displayFormat="h:mm A" pickerFormat="h:mm A" placeholder="Seleccione una hora"></IonDatetime>
-                                        </IonItem>
-                                    </IonCol>
-                                </IonRow>
-                                <IonRow>
-                                    <IonCol>
-                                        <IonItem>
-                                            <IonLabel position="stacked">Comentario<IonText color="danger">*</IonText></IonLabel>
-                                            <IonTextarea rows={2} className="ion-margin-top" name="init_comment" disabled={false} value={this.state.cita.init_comment} onIonChange={e => this.handleChange(e)} ></IonTextarea>
+                                            <IonLabel position="stacked">Descripción<IonText color="danger">*</IonText></IonLabel>
+                                            <IonTextarea rows={2} className="ion-margin-top" name="descrip" disabled={false} value={this.state.signo.descrip} onIonChange={e => this.handleChange(e)} ></IonTextarea>
                                         </IonItem>
                                     </IonCol>
                                 </IonRow>
                                 <IonRow style={{ marginTop: 20 }} className="ion-text-center">
                                     <IonCol>
-                                        <IonButton color="primary" type="submit" class="ion-no-margin">{!this.state.editMode ? 'Agendar cita' : 'Guaradar cambios'}</IonButton>
+                                        <IonButton color="primary" type="submit" class="ion-no-margin">{!this.state.editMode ? 'Registrar Signo Vital' : 'Guaradar cambios'}</IonButton>
                                     </IonCol>
+                                    {/* <IonCol>
+                                        <IonButton onClick={} color="danger" class="ion-no-margin">
+                                            Cancelar
+                                        </IonButton>
+                                    </IonCol> */}
                                     <IonCol>
-                                        <IonButton routerLink={this.getRoute('/agendaCitas')} color="danger" class="ion-no-margin">
+                                        <IonButton routerLink={this.getRoute("/seguimiento/infomedica/") + this.props.match.params.seguimiento} color="danger" class="ion-no-margin">
                                             Cancelar
                                         </IonButton>
                                     </IonCol>
@@ -186,7 +180,7 @@ export default class FormAgendadoCita extends React.Component {
                         isOpen={this.state.confirmSave}
                         onDidDismiss={() => this.setState({ confirmSave: false })}
                         header={'Confirmación'}
-                        message={this.state.editMode ? '¿Desea guardar los nuevos cambios?' : '¿Está seguro agendar esta nueva cita?'}
+                        message={this.state.editMode ? '¿Desea guardar los nuevos cambios?' : '¿Está seguro registrar este signo vital?'}
                         buttons={[
                             {
                                 text: 'Cancel',
@@ -201,9 +195,9 @@ export default class FormAgendadoCita extends React.Component {
                                 text: 'Aceptar',
                                 handler: () => {
                                     if (this.state.editMode) {
-                                        this.updateCita();
+                                        this.editSignoVital()
                                     } else {
-                                        this.saveCita();
+                                        this.saveSignoVital();
                                     }
 
                                 }
@@ -212,8 +206,8 @@ export default class FormAgendadoCita extends React.Component {
                     />
 
                     <IonLoading
-                        isOpen={this.state.loading}
-                        message={this.state.editMode ? 'Cargando datos. Espere por favor...' : 'Registrando Información. Espere por favor...'}
+                        isOpen={this.state.loadingSave}
+                        message={this.state.editMode ? 'Guardando datos. Espere por favor...' : 'Registrando Información. Espere por favor...'}
                     />
 
                     <IonLoading
@@ -224,12 +218,12 @@ export default class FormAgendadoCita extends React.Component {
                     <IonAlert
                         isOpen={this.state.alerta}
                         onDidDismiss={() => this.setState({ alerta: false })}
-                        header={"Cita Guardada"}
+                        header={"Signo Vital Guardado"}
                         buttons={[
                             {
                                 text: 'Aceptar',
                                 handler: () => {
-                                    this.props.history.push(this.getRoute('/agendaCitas'));
+                                    this.props.history.push(this.getRoute("/seguimiento/infomedica/") + this.props.match.params.seguimiento);
                                 }
                             }
                         ]}
@@ -239,4 +233,5 @@ export default class FormAgendadoCita extends React.Component {
             </IonPage>
         );
     }
+
 }

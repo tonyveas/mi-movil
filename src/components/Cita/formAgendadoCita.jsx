@@ -77,11 +77,13 @@ export default class FormAgendadoCita extends React.Component {
     }
 
     getCitaByID() {
+        this.setState({isLoadingGet: true});
         AxiosCitas.getCitaByID({ id: this.props.match.params.id }).then(resp => {
             console.log(resp);
-            this.setState({ cita: resp.data });
+            this.setState({ cita: resp.data, isLoadingGet: false });
         }).catch(err => {
             console.log(err);
+            this.setState({ isLoadingGet: false});
         });
     }
 
@@ -211,7 +213,12 @@ export default class FormAgendadoCita extends React.Component {
 
                     <IonLoading
                         isOpen={this.state.loading}
-                        message={this.state.editMode ? 'Cargando datos. Espere por favor...' : 'Registrando Información. Espere por favor...'}
+                        message={this.state.editMode ? 'Guardando datos. Espere por favor...' : 'Registrando Información. Espere por favor...'}
+                    />
+
+                    <IonLoading
+                        isOpen={this.state.isLoadingGet}
+                        message={'Cargando datos. Espere por favor...'}
                     />
 
                     <IonAlert

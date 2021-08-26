@@ -12,7 +12,7 @@ export default class FormAgendadoCita extends React.Component {
         this.state = {
             cita: {},
             editMode: null,
-            medicos: []
+            pacientes: []
         }
 
     }
@@ -21,10 +21,10 @@ export default class FormAgendadoCita extends React.Component {
         let date = new Date(this.state.cita.date).toISOString();
         let start = new Date(this.state.cita.start).toISOString();
         let end = new Date(this.state.cita.end).toISOString();
-        let paciente = Auth.getDataUser().cedula;
+        let medico = Auth.getDataUser().cedula;
         let inicio_cita = date.split("T")[0] + "T" + start.split("T")[1];
         let fin_cita = date.split("T")[0] + "T" + end.split("T")[1];
-        return { fin_cita, inicio_cita, paciente, estado: "P" }
+        return { fin_cita, inicio_cita, medico, estado: "P" }
     }
 
     getRoute(posFix = "") {
@@ -34,24 +34,10 @@ export default class FormAgendadoCita extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ editMode: this.props.match.params.id }, () => {
-            if (this.state.editMode) {
-                this.getCitaByID();
-            }
-        })
-        this.getMedicos();
+        this.setState({...this.props.match.params });
     }
 
-    getMedicos = () => {
-        this.setState({ fetchingPacientes: true, pacientes: [] });
-        AxiosPersonas.getMedicosFilter("").then(resp => {
-            console.log(resp);
-            this.setState({ fetchingPacientes: false, medicos: resp.data });
-        }).catch(err => {
-            this.setState({ fetchingPacientes: false });
-            console.log(err);
-        });
-    }
+
 
     saveCita() {
         this.setState({ loading: true });
@@ -62,28 +48,6 @@ export default class FormAgendadoCita extends React.Component {
         }).catch(err => {
             console.log(err);
             this.setState({ loading: false });
-        });
-    }
-
-    updateCita() {
-        this.setState({ loading: true });
-        AxiosCitas.reangedarCancelarCita({ ...this.state.cita, ...this.processCitaData() }).then(resp => {
-            console.log(resp);
-            this.setState({ loading: false, alerta: true, cita: {} });
-        }).catch(err => {
-            console.log(err);
-            this.setState({ loading: false });
-        });
-    }
-
-    getCitaByID() {
-        this.setState({ isLoadingGet: true });
-        AxiosCitas.getCitaByID({ id: this.props.match.params.id }).then(resp => {
-            console.log(resp);
-            this.setState({ cita: resp.data, isLoadingGet: false });
-        }).catch(err => {
-            console.log(err);
-            this.setState({ isLoadingGet: false });
         });
     }
 
@@ -103,7 +67,7 @@ export default class FormAgendadoCita extends React.Component {
                 <IonToolbar color="primary">
                     <IonButtons slot="start">
 
-                        <IonButton routerLink={this.getRoute("/agendaCitas")}>
+                        <IonButton routerLink={this.getRoute("/seguimiento/citasasociadas/") + this.props.match.params.seguimiento}>
                             <IonIcon slot="icon-only" icon={arrowBackOutline} />
                         </IonButton>
                     </IonButtons>
@@ -117,20 +81,6 @@ export default class FormAgendadoCita extends React.Component {
                                 <IonRow class="ion-text-center">
                                     <IonCol>
                                         <img style={{ marginTop: 20, marginBottom: 20 }} src="./assets/img/icons/usuarios/usuario.png" alt="usuario" />
-                                    </IonCol>
-                                </IonRow>
-
-                                <IonRow >
-                                    <IonCol>
-                                        <IonItem>
-                                            <IonSelect disabled={this.state.editMode} name="medico" placeholder="Seleccione al Medico" value={this.state.cita.medico} cancelText="Cancelar" okText="Aceptar" onIonChange={e => this.handleChange(e)}>
-                                                {
-                                                    this.state.medicos.map((item) => (
-                                                        <IonSelectOption key={item.cedula} value={item.cedula}>{item.nombre + " " + item.apellido + " - " + item.especialidad}</IonSelectOption>
-                                                    ))
-                                                }
-                                            </IonSelect>
-                                        </IonItem>
                                     </IonCol>
                                 </IonRow>
 
@@ -213,7 +163,7 @@ export default class FormAgendadoCita extends React.Component {
 
                     <IonLoading
                         isOpen={this.state.loading}
-                        message={this.state.editMode ? 'Cargando datos. Espere por favor...' : 'Registrando Información. Espere por favor...'}
+                        message={this.state.editMode ? 'Guardando datos. Espere por favor...' : 'Registrando Información. Espere por favor...'}
                     />
 
                     <IonLoading
@@ -229,7 +179,7 @@ export default class FormAgendadoCita extends React.Component {
                             {
                                 text: 'Aceptar',
                                 handler: () => {
-                                    this.props.history.push(this.getRoute('/agendaCitas'));
+                                    this.props.history.push(this.getRoute("/seguimiento/citasasociadas/") + this.props.match.params.seguimiento);
                                 }
                             }
                         ]}

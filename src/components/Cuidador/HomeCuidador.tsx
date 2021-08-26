@@ -98,6 +98,15 @@ import Auth from '../../Login/Auth';
                 </IonButton>
               </IonCol>
             </IonRow>
+            <IonRow  class="row">
+              <IonCol  size="12">     
+                <IonButton color="primary" class="boton" routerLink="/cuidador/seguimientos" expand="block" size="large">
+                <div className="margen">
+                  <img src={process.env.PUBLIC_URL + "./assets/img/main/img2/seguimiento.png"} className="responsive" alt="" /><br/><br/><IonLabel>Seguimiento de Pacientes</IonLabel>   
+                </div>  
+                </IonButton>
+              </IonCol>
+            </IonRow>
             {/* <IonRow  class="row">
               <IonCol  size="12">     
                 <IonButton color="primary" class="boton" routerLink="/cuidador/seguimiento" expand="block" size="large">
