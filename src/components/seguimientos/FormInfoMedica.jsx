@@ -2,8 +2,8 @@ import { IonPage, IonToolbar, IonButtons, IonDatetime, IonSelectOption, IonSelec
 import React from 'react'
 import { arrowBackOutline, trash } from 'ionicons/icons';
 import Auth from '../../Login/Auth';
-import {FileChooser} from "@ionic-native/file-chooser";
-import {FilePath} from "@ionic-native/file-path";
+// import {FileChooser} from "@ionic-native/file-chooser";
+// import {FilePath} from "@ionic-native/file-path";
 import AxiosSignosVitales from '../../Services/AxiosSignosVitales';
 
 export default class FormInfoMedica extends React.Component {
