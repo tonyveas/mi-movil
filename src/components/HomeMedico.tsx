@@ -36,7 +36,7 @@ import AxiosCitas from '../Services/AxiosCitas';
     
     const [cantidad, setCantidad] = useState(0);
     const [mostrarAlerta, setMostrarAlerta] = useState(false);
-    const [cargando, setCargando] = React.useState(false);
+    //const [cargando, setCargando] = React.useState(false);
     
     useIonViewWillEnter(() => {
       console.log('ionViewWillEnter event fired');
@@ -44,11 +44,11 @@ import AxiosCitas from '../Services/AxiosCitas';
     });
 
     const cargar_recordatorios = () => {
-      setCargando(true)
+      //setCargando(true)
       AxiosCitas.citas_recordatorios_medico({"cedula": Auth.getDataUser().cedula}).then( res => {
         console.log("citas_recordatorios_medico: ",(res.data).length);
         setCantidad((res.data).length);
-        setCargando(false);
+        //setCargando(false);
         setMostrarAlerta(true);
       });
     }
@@ -124,10 +124,10 @@ import AxiosCitas from '../Services/AxiosCitas';
             position="top"
             color="success"
           />
-          <IonLoading
+          {/* <IonLoading
             isOpen={cargando}
             message={'Cargando datos. Espere por favor...'}
-          />
+          /> */}
         </IonContent>
       </IonPage>
     );

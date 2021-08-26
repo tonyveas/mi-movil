@@ -47,17 +47,17 @@ const Pacientes  = (props:any) => {
                             <img style={{ marginLeft: 150, marginTop: 25, marginBottom: 25 }} src="./assets/img/icons/usuarios/usuario.png"  alt="usuario" />
                         </IonItem>
                         <IonItem>
-                            <IonIcon slot="start" icon={key}></IonIcon>
+                            <IonIcon slot="start" icon={reader}></IonIcon>
                             <IonLabel>Nombre</IonLabel>
                             <IonNote slot="end">{props.nombre}</IonNote>
                         </IonItem>
                         <IonItem>
-                            <IonIcon slot="start" icon={key}></IonIcon>
+                            <IonIcon slot="start" icon={reader}></IonIcon>
                             <IonLabel>Apellido</IonLabel>
                             <IonNote slot="end">{props.apellido}</IonNote>
                         </IonItem>
                         <IonItem>
-                            <IonIcon slot="start" icon={key}></IonIcon>
+                            <IonIcon slot="start" icon={reader}></IonIcon>
                             <IonLabel>Cedula</IonLabel>
                             <IonNote slot="end">{props.cedula}</IonNote>
                         </IonItem>
@@ -67,7 +67,7 @@ const Pacientes  = (props:any) => {
                             <IonNote slot="end">{props.correo}</IonNote>
                         </IonItem>
                         <IonItem>
-                            <IonIcon slot="start" icon={key}></IonIcon>
+                            <IonIcon slot="start" icon={reader}></IonIcon>
                             <IonLabel>Sexo</IonLabel>
                             <IonNote slot="end">{props.sexo === "M"? "Masculino": props.sexo === "F"? "Femenino":"Prefiero no decirlo"}</IonNote>
                         </IonItem>

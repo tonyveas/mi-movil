@@ -22,20 +22,20 @@ import {
       }
     }
   
-    getPictures = () =>  {
-        let options  = {  
-            quality: 100,  
-            width: 600,  
-            height: 600,              
-            outputType: 1,
-            maximumImagesCount: 8
-          }; 
-          this.state.imagePicker.getPictures(options).then((results:any) => {
-            for (var i = 0; i < results.length; i++) {
-                console.log('Image URI: ' + results[i]);
-            }
-          }, (err:any) => { console.log(err) });        
-    }    
+    // getPictures = () =>  {
+    //     let options  = {  
+    //         quality: 100,  
+    //         width: 600,  
+    //         height: 600,              
+    //         outputType: 1,
+    //         maximumImagesCount: 8
+    //       }; 
+    //       this.state.imagePicker.getPictures(options).then((results:any) => {
+    //         for (var i = 0; i < results.length; i++) {
+    //             console.log('Image URI: ' + results[i]);
+    //         }
+    //       }, (err:any) => { console.log(err) });        
+    // }    
 
     render() {
   
@@ -50,7 +50,7 @@ import {
             </IonToolbar>
             <IonContent>
 
-                <IonButton onClick = {() => this.getPictures()}>UP</IonButton>          
+                {/* <IonButton onClick = {() => this.getPictures()}>UP</IonButton>           */}
 
             </IonContent>
         </IonPage>
