@@ -486,7 +486,7 @@ const AtenderCita = (props:any) => {
     const fcita = (segui:any) => {
         setShowModal(false);
         setGuardando(true);
-        console.log("fcita");
+        // console.log("fcita");
         // console.log("discapacidadesSeleccionadas: ", discapacidadesSeleccionadas);
         let temp_discapacidades = []; // Discapacidades seleccionadas ids
         let listaDisc:any = [];       // Nombres de discapacidades que se agregan manualmente
@@ -609,7 +609,7 @@ const AtenderCita = (props:any) => {
             "instrucciones": instrucciones,
             "sintomas": diagnostico,
             "fecha_atencion": moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
-            "seguimiento": segui===-1?'':segui,
+            "seguimiento": segui,
             "enfermedades_cita_paciente": temp_enfermedades_citas,
             "medicamentos_cita_paciente": medicamentos_nuevos_mod
         };
@@ -993,15 +993,6 @@ const AtenderCita = (props:any) => {
                                             </IonItemDivider>
                                                 {
                                                     medicamentosAgregadas.map ( item => (
-                                                        <>
-                                                        {/* <IonItem key = {props.id_medicamento} className = "ion-activatable">
-                                                            <IonLabel>
-                                                                <h2><b>Medicamento: {item.medicamento}</b></h2>
-                                                                <h3>Dosis: {item.dosis}</h3>
-                                                                <p>Frecuencia: {item.frecuencia}</p>
-                                                                <p>Duración: {item.duracion}</p>
-                                                            </IonLabel>
-                                                        </IonItem> */}
                                                         <IonItem 
                                                             key = {item.key} 
                                                         lines="none">                                                            
@@ -1027,7 +1018,6 @@ const AtenderCita = (props:any) => {
                                                             onClick = {() => remove_medicamento(item.key)}
                                                             ></IonIcon>
                                                         </IonItem>
-                                                        </>
                                                     ))
                                                 }
 

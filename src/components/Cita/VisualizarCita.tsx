@@ -224,6 +224,9 @@ const VisualizarCita = (props:any) => {
             setCitas(response.data[6][0]);
             setExamenes(response.data[7]);
             setCargando(false);
+            console.log("SIGNOS: ",response.data[5]);
+            console.log("CITAS: ",response.data[6][0]);
+
             // console.log(fileList);
             // message.success({ content: 'Mostrando cita', key, duration: 3 });
         });
@@ -269,7 +272,7 @@ const VisualizarCita = (props:any) => {
             setFechaNacimiento(response.data.fecha_nacimiento);
             setCorreo(response.data.correo);
             setSexo(response.data.sexo);
-            setCargando(false);
+            //setCargando(false);
         });  
       }
 
@@ -298,7 +301,7 @@ const VisualizarCita = (props:any) => {
         }
         AxiosUsers.actualizar_perfil(u).then ( response => {
             console.log("actualizar_perfil: ",response);
-            setCargando(false);
+            //setCargando(false);
             setMensaje("Registro actualizado satisfactoriamente")
             setAlerta(true);
         });
@@ -884,17 +887,55 @@ const VisualizarCita = (props:any) => {
                                                 </IonLabel>
                                             </IonItemDivider>
                                                 {/* <IonLabel>Toppings</IonLabel> */}
-                                                
+
+                                                {/* 
+
+<IonItem key = {props.id_medicamento} className = "ion-activatable">
+                <IonLabel onClick={() => setDetalleVentana(true)}>
+                    <IonRippleEffect></IonRippleEffect>
+                    <h2><b>{props.codigo}</b></h2>
+                    <h3>Nombre: {props.nombre}</h3>
+                    <p>Descripción: {props.descrip}</p>
+                </IonLabel>
+                <IonAvatar slot="start">
+                    <img src="./assets/img/icons/medicinas/medicina.png"  alt="medicina" />
+                </IonAvatar> 
+                <IonButton size="default" fill="clear" routerLink={`/admin/edit/medicamentos/${props.id_medicamento}`}><IonIcon slot="end" color="medium" icon={create}></IonIcon></IonButton>
+                <IonButton size="default" fill="clear" onClick = { () => props.handler_eliminar() }><IonIcon slot="end" color="medium" icon={trash}></IonIcon></IonButton>
+            </IonItem>
+
+                                                */}
+
                                                 {
                                                     dataSource.map( (item:any) => (
-                                                        <IonItem>
-                                                            <IonLabel>item.medicamento </IonLabel>
-                                                            <IonLabel>item.dosis </IonLabel>
-                                                            <IonLabel>item.frecuencia </IonLabel>
-                                                            <IonLabel>item.duracion </IonLabel>
+                                                        <IonItem key = {props.id_medicamento} className = "ion-activatable">
+                                                            <IonLabel>
+                                                                {/* <IonRippleEffect></IonRippleEffect> */}
+                                                                <h2><b>Medicamento: {item.medicamento}</b></h2>
+                                                                <h3>Dosis: {item.dosis}</h3>
+                                                                <p>Frecuencia: {item.frecuencia}</p>
+                                                                <p>Duración: {item.duracion}</p>
+                                                            </IonLabel>
                                                         </IonItem>
+                                                        // <IonItem>
+                                                        //     <IonLabel>{item.medicamento} </IonLabel>
+                                                        //     <IonLabel>{item.dosis} </IonLabel>
+                                                        //     <IonLabel>{item.frecuencia} </IonLabel>
+                                                        //     <IonLabel>{item.duracion} </IonLabel>
+                                                        // </IonItem>
                                                     ))
                                                 }
+
+                                                {/* {
+                                                    dataSource.map( (item:any) => (
+                                                        <IonItem>
+                                                            <IonLabel>{item.medicamento} </IonLabel>
+                                                            <IonLabel>{item.dosis} </IonLabel>
+                                                            <IonLabel>{item.frecuencia} </IonLabel>
+                                                            <IonLabel>{item.duracion} </IonLabel>
+                                                        </IonItem>
+                                                    ))
+                                                } */}
 
                                             <IonItem>
                                                 <IonTextarea rows = {3} value = {citas!==undefined?citas.instrucciones:""} onIonChange = { (e:any) => setInstrucciones(e.target.value) } className = "ion-margin-top" required disabled = {true} ></IonTextarea>                            

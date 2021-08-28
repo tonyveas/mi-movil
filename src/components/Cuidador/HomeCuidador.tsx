@@ -49,7 +49,10 @@ import Auth from '../../Login/Auth';
         console.log("citas_recordatorios_cuidador: ",(res.data).length);
         setCantidad((res.data).length);
         // setCargando(false);
-        setMostrarAlerta(true);
+        // setMostrarAlerta(true);
+        if (res.data.length>0){
+          setMostrarAlerta(true);
+        }
       });
     }
   
