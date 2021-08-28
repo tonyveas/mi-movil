@@ -127,6 +127,7 @@ export default class CitasAsociadas extends React.Component {
                             </div> : null
                     }
                 </IonContent>
+                
                 <IonLoading
                     isOpen={this.state.isLoading}
                     message={'Cargando datos. Espere por favor...'}

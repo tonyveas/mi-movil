@@ -1,6 +1,6 @@
 import { IonPage, IonToolbar, IonButtons, IonDatetime, IonSelectOption, IonSelect, IonBackButton, IonTitle, IonContent, IonRow, IonGrid, IonCol, IonItem, IonLabel, IonList, IonInput, IonText, IonTextarea, IonButton, IonRouterLink, IonAlert, IonLoading, useIonViewWillLeave, useIonViewWillEnter, IonIcon } from '@ionic/react'
 import React from 'react'
-import { arrowBackOutline, trash } from 'ionicons/icons';
+import { arrowBackOutline, trash, add } from 'ionicons/icons';
 import Auth from '../../Login/Auth';
 import AxiosPersonas from '../../Services/AxiosPersonas';
 import AxiosCitas from '../../Services/AxiosCitas';
@@ -34,6 +34,58 @@ export default class FormExamenesAsociados extends React.Component {
         })
     }
 
+    saveExamen() {
+        if (this.state.fileList.length < 1) {
+            this.setState({ alertaFile: true });
+            return;
+        }
+        const formData = new FormData();
+        const values = this.state.examen;
+        formData.append("tipo_examen", values.tipo_examen);
+        formData.append("comentarios", values.comentarios);
+        formData.append("diagnostico", values.diagnostico);
+        formData.append("seguimiento", this.state.seguimiento);
+        formData.append("medico", this.state.medico);
+        formData.append("paciente", this.state.paciente);
+
+        for (let img of this.state.fileList) {
+            formData.append("images[]", img);
+        }
+
+        this.setState({ loadingSave: true });
+        AxiosExamenes.saveExamen(formData).then(resp => {
+            console.log(resp);
+            this.setState({ loadingSave: false, alerta: true });
+        }).catch(error => {
+            console.log(error);
+            this.setState({ loadingSave: false });
+        });
+    }
+
+    editExamen() {
+
+        const formData = new FormData();
+        const values = this.state.examen;
+        formData.append("tipo_examen", values.tipo_examen);
+        formData.append("comentarios", values.comentarios);
+        formData.append("diagnostico", values.diagnostico);
+        formData.append("id_examen", this.props.match.params.id);
+
+        for (let img of this.state.fileList) {
+            formData.append("images[]", img);
+        }
+
+        this.setState({ loadingSave: true });
+        AxiosExamenes.editExamen(formData).then(resp => {
+            console.log(resp);
+            this.setState({ loadingSave: false, alerta: true });
+        }).catch(error => {
+            console.log(error);
+            this.setState({ loadingSave: false });
+        });
+
+    }
+
     getExamenByID() {
         this.setState({ isLoadingGet: true });
         AxiosExamenes.getExamenByID({ id_examen: this.props.match.params.id }).then(resp => {
@@ -54,6 +106,14 @@ export default class FormExamenesAsociados extends React.Component {
         });
     }
 
+    renderFileList() {
+        let names = []
+        for (let img of this.state.fileList) {
+            names.push(img.name);
+        }
+        return names.map(name => (<p style={{ margin: "2px", paddingLeft: "2px" }} key={name}>{name}</p>));
+    }
+
     render() {
         return (
             <IonPage>
@@ -68,7 +128,7 @@ export default class FormExamenesAsociados extends React.Component {
                 </IonToolbar>
 
                 <IonContent fullscreen>
-                    <form onSubmit={(e) => { e.preventDefault(); this.setState({ confirmSave: true }) }}>
+                    <form onSubmit={(e) => { e.preventDefault(); this.setState({ confirmSave: true }); }}>
                         <IonList>
                             <IonGrid>
                                 <IonRow class="ion-text-center">
@@ -100,16 +160,31 @@ export default class FormExamenesAsociados extends React.Component {
                                 <IonRow>
                                     <IonCol>
                                         <IonItem>
-                                            <IonLabel position="stacked">Comentario<IonText color="danger">*</IonText></IonLabel>
-                                            <IonTextarea rows={2} className="ion-margin-top" name="comentario" disabled={false} value={this.state.examen.comentario} onIonChange={e => this.handleChange(e)} ></IonTextarea>
+                                            <IonLabel position="stacked">Comentarios<IonText color="danger">*</IonText></IonLabel>
+                                            <IonTextarea rows={2} className="ion-margin-top" name="comentarios" disabled={false} value={this.state.examen.comentarios} onIonChange={e => this.handleChange(e)} ></IonTextarea>
                                         </IonItem>
                                     </IonCol>
                                 </IonRow>
                                 <IonRow>
                                     <IonCol>
                                         <IonItem>
-                                            <IonLabel position="stacked">filel<IonText color="danger">*</IonText></IonLabel>
-                                            <IonInput onIonChange={(e) => {this.setState({ fileList: e.target.value }, () => { console.log(this.state.fileList) })}} name="file"  type="file" value={this.state.fileList ? this.state.fileList : []} placeholder="Ingrese el valor del Signo Vital"></IonInput>
+                                            <IonLabel position="stacked">Archivos (Imágenes)<IonText color="danger">*</IonText></IonLabel>
+                                            <br />
+                                            <div style={{ display: "flex", }}>
+                                                {
+                                                    this.state.examen.url_examen && this.state.editMode ?
+                                                        this.state.examen.url_examen.split(",").map((img) => (
+                                                            <div style={{ textAlign: "center", margin: "10px" }}>
+                                                                <img style={{ width: "120px", height: "60px" }} src={img} alt="examen" />
+                                                            </div>
+                                                        )) : null
+                                                }
+                                            </div>
+                                            <IonButton style={{ margin: "30px", paddingLeft: "14%" }} onClick={(e) => { document.getElementById("selectImage").click() }}>
+                                                <IonIcon slot="icon-only" icon={add} /> Agregar Archivo
+                                            </IonButton>
+                                            <input style={{ display: "none" }} id="selectImage" multiple="multiple" onChange={(e) => { this.setState({ fileList: e.target.files }) }} name="file" type="file" ></input>
+                                            {this.renderFileList()}
                                         </IonItem>
                                     </IonCol>
                                 </IonRow>
@@ -152,9 +227,9 @@ export default class FormExamenesAsociados extends React.Component {
                                 text: 'Aceptar',
                                 handler: () => {
                                     if (this.state.editMode) {
-                                        this.editSignoVital()
+                                        this.editExamen()
                                     } else {
-                                        this.saveSignoVital();
+                                        this.saveExamen();
                                     }
 
                                 }
@@ -181,6 +256,21 @@ export default class FormExamenesAsociados extends React.Component {
                                 text: 'Aceptar',
                                 handler: () => {
                                     this.props.history.push(this.getRoute("/seguimiento/examenes/") + this.props.match.params.seguimiento);
+                                }
+                            }
+                        ]}
+                    />
+
+                    <IonAlert
+                        isOpen={this.state.alertaFile}
+                        onDidDismiss={() => this.setState({ alertaFile: false })}
+                        header={"Archivos"}
+                        message={"Debe ingresar una imagen valida"}
+                        buttons={[
+                            {
+                                text: 'Aceptar',
+                                handler: () => {
+                                    this.setState({ alertaFile: false });
                                 }
                             }
                         ]}

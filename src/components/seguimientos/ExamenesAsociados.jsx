@@ -32,7 +32,7 @@ export default class ExamenesAsociados extends React.Component  {
 
     }
 
-    handlerCancel = (cita) => { this.setState({ mostrarConfirmacion: true, cita }) }
+    handlerCancel = (examen) => { this.setState({ mostrarConfirmacion: true, examen }) }
 
     getRoute(posFix = "") {
         if (Auth.isMedico()) return "/medico" + posFix;
@@ -64,10 +64,11 @@ export default class ExamenesAsociados extends React.Component  {
     }
 
     deleteExamenAsociado(examen) {
+        console.log(examen)
         this.setState({ loadingCancel: true })
         AxiosExamenes.deleteExamen(examen).then(resp => {
             console.log(resp);
-            this.setState({ loadingCancel: false, alert: false })
+            this.setState({ loadingCancel: false, alert: true })
             this.getSeguimientoId();
         }).catch(err => {
             console.log(err);

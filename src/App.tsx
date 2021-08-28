@@ -120,6 +120,7 @@ const App: React.FC = () => {
             <PrivateRouteMedicoCC exact path='/medico/seguimiento/citasasociadas/create/:seguimiento/:medico/:paciente' component={FormCitasAsociadas}/>
             <PrivateRouteMedicoCC exact path='/medico/seguimiento/examenes/:id' component={ExamenesAsociados}/>
             <PrivateRouteMedicoCC exact path='/medico/seguimiento/examenes/create/:seguimiento/:medico/:paciente' component={FormExamenesAsociados}/>
+            <PrivateRouteMedicoCC exact path='/medico/seguimiento/examenes/edit/:id/:seguimiento' component={FormExamenesAsociados}/>
 
             {/* <PrivateRouteMedico exact path='/medico/atenderCita' component={AtenderCita}/>
             <PrivateRouteMedico exact path='/medico/atenderCita/:id' component={AtenderCita}/> */}
@@ -144,9 +145,9 @@ const App: React.FC = () => {
             <PrivateRoutePacienteCC exact path='/paciente/seguimiento/infomedica/edit/:id/:seguimiento' component={FormInfoMedica}/>
             <PrivateRoutePacienteCC exact path='/paciente/seguimiento/examenes/:id' component={ExamenesAsociados}/>
             <PrivateRoutePacienteCC exact path='/paciente/seguimiento/examenes/create/:seguimiento/:medico/:paciente' component={FormExamenesAsociados}/>
+            <PrivateRoutePacienteCC exact path='/paciente/seguimiento/examenes/edit/:id/:seguimiento' component={FormExamenesAsociados}/>
             <PrivateRoutePacienteCC exact path='/paciente/seguimiento/citasasociadas/:id' component={CitasAsociadas}/>
             <PrivateRoutePacienteCC exact path='/paciente/seguimiento/citasasociadas/create/:seguimiento/:medico/:paciente' component={FormCitasAsociadas}/>
-
             {/* <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas/:id' component={FormAgendaCitas}/> */}
             <PrivateRoutePaciente exact path='/paciente/homecuidadores' component={HomeCuidadoresPaciente} />
             <PrivateRoutePaciente exact path='/paciente/recordatorios' component={RecordatoriosPacientes} />
@@ -167,6 +168,7 @@ const App: React.FC = () => {
             <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/infomedica/edit/:id/:seguimiento' component={FormInfoMedica}/>
             <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/examenes/:id' component={ExamenesAsociados}/>
             <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/examenes/create/:seguimiento/:medico/:paciente' component={FormExamenesAsociados}/>
+            <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/examenes/edit/:id/:seguimiento' component={FormExamenesAsociados}/>
             <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/citasasociadas/:id' component={CitasAsociadas}/>
             <PrivateRouteCuidadorCC exact path='/cuidador/seguimiento/citasasociadas/create/:seguimiento/:medico/:paciente' component={FormCitasAsociadas}/>
             <PrivateRouteCuidador exact path='/cuidador/perfil/:ced' component={FormularioPerfiles}/>
