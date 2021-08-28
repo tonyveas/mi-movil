@@ -49,7 +49,9 @@ import AxiosCitas from '../Services/AxiosCitas';
         console.log("citas_recordatorios_medico: ",(res.data).length);
         setCantidad((res.data).length);
         //setCargando(false);
-        setMostrarAlerta(true);
+        if (res.data.length>0){
+          setMostrarAlerta(true);
+        }
       });
     }
     
