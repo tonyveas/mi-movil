@@ -13,11 +13,13 @@ import {
 import Auth from '../../Login/Auth';
 import { add, arrowBackOutline, close, key } from 'ionicons/icons';
 import Respuesta from '../Respuesta';
-import ItemCitaAsociada from './ItemCitaAsociada';
+import ItemExamenAsociado from './ItemExamenAsociado';
 import AxiosSeguimientos from '../../Services/AxiosSeguimientos';
 import AxiosCitas from '../../Services/AxiosCitas'
+import AxiosExamenes from '../../Services/AxiosExamenes';
 
-export default class CitasAsociadas extends React.Component {
+
+export default class ExamenesAsociados extends React.Component  {
 
     constructor(props) {
         super(props);
@@ -25,7 +27,7 @@ export default class CitasAsociadas extends React.Component {
         this.state = {
             isLoading: true,
             seguimientoData: {},
-            citas: []
+            examenes: []
         }
 
     }
@@ -50,8 +52,8 @@ export default class CitasAsociadas extends React.Component {
                 const paciente = seg["cedulaPaciente"];
                 const id_seguimiento = seg["id_seguimiento"];
                 const medico = seg["cedulaMedico"];
-                const citas = this.state.seguimientoData["citas"] ? this.state.seguimientoData["citas"] : [];
-                this.setState({ citas, paciente, medico, id_seguimiento })
+                const examenes = this.state.seguimientoData["examenes"] ? this.state.seguimientoData["examenes"] : [];
+                this.setState({ examenes, paciente, medico, id_seguimiento })
             });
             if (e) e.detail.complete();
         }).catch(err => {
@@ -61,9 +63,9 @@ export default class CitasAsociadas extends React.Component {
         });
     }
 
-    reangedarCancelarCita(cita) {
+    deleteExamenAsociado(examen) {
         this.setState({ loadingCancel: true })
-        AxiosCitas.reangedarCancelarCita(cita).then(resp => {
+        AxiosExamenes.deleteExamen(examen).then(resp => {
             console.log(resp);
             this.setState({ loadingCancel: false, alert: false })
             this.getSeguimientoId();
@@ -83,15 +85,15 @@ export default class CitasAsociadas extends React.Component {
                             <IonIcon slot="icon-only" icon={arrowBackOutline} />
                         </IonButton>
                     </IonButtons>
-                    <IonTitle>Citas Asociadas</IonTitle>
+                    <IonTitle>Exámenes Asociados</IonTitle>
                     <IonButtons slot="end">
-                        <IonButton routerLink={this.getRoute("/seguimiento/citasasociadas/create/") + this.state.id_seguimiento + "/" + this.state.medico + "/" + this.state.paciente }><IonIcon icon={add}></IonIcon></IonButton>
+                        <IonButton routerLink={this.getRoute("/seguimiento/examenes/create/") + this.state.id_seguimiento + "/" + this.state.medico + "/" + this.state.paciente }><IonIcon icon={add}></IonIcon></IonButton>
                     </IonButtons>
                 </IonToolbar>
 
                 <IonContent>
                     {
-                        this.state.citas.length === 0 ? <Respuesta /> : null
+                        this.state.examenes.length === 0 ? <Respuesta /> : null
                     }
                     <IonRefresher slot="fixed" onIonRefresh={(e) => this.getSeguimientoId(e)}>
                         <IonRefresherContent
@@ -104,9 +106,9 @@ export default class CitasAsociadas extends React.Component {
 
                     <IonList>
                         {
-                            this.state.citas.map((item) => (
-                                <ItemCitaAsociada
-                                    cita={item}
+                            this.state.examenes.map((item) => (
+                                <ItemExamenAsociado
+                                    examen={item}
                                     paciente={this.state.paciente}
                                     medico={this.state.medico}
                                     id_seguimiento={this.state.id_seguimiento}
@@ -117,7 +119,7 @@ export default class CitasAsociadas extends React.Component {
                     </IonList>
 
                     {
-                        this.state.citas.length !== 0 ?
+                        this.state.examenes.length !== 0 ?
                             <div className="ion-margin">
                                 <IonItem lines="none">
                                     <br />
@@ -134,14 +136,14 @@ export default class CitasAsociadas extends React.Component {
 
                 <IonLoading
                     isOpen={this.state.loadingCancel}
-                    message={'Cancelando Cita. Espere por favor...'}
+                    message={'Elimando Registro. Espere por favor...'}
                 />
 
                 <IonAlert
                     onDidDismiss={() => this.setState({ mostrarConfirmacion: false })}
                     isOpen={this.state.mostrarConfirmacion}
-                    header={"Cancelar Cita"}
-                    message={'¿Está seguro de cancelar cita?'}
+                    header={"Eliminar Examen"}
+                    message={'¿Está seguro de eliminar examen?'}
                     buttons={[
                         {
                             text: 'No',
@@ -154,7 +156,7 @@ export default class CitasAsociadas extends React.Component {
                         {
                             text: 'Si',
                             handler: () => {
-                                this.setState({ cita: { ...this.state.cita, estado: "C", inicio_cita: new Date(this.state.cita.start), fin_cita: new Date(this.state.cita.end) } }, () => { this.reangedarCancelarCita(this.state.cita)})
+                                this.deleteExamenAsociado(this.state.examen)
                             }
                         }
                     ]}
@@ -163,7 +165,7 @@ export default class CitasAsociadas extends React.Component {
                 <IonAlert
                     isOpen={this.state.alerta}
                     onDidDismiss={() => this.setState({ alert: false })}
-                    header={"Registro cancelado satisfactoriamente"}
+                    header={"Registro eliminado satisfactoriamente"}
                     buttons={['Aceptar']}
                 />
 
@@ -171,4 +173,5 @@ export default class CitasAsociadas extends React.Component {
 
         );
     }
+
 }

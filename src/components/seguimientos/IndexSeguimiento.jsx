@@ -97,7 +97,7 @@ const HomePaciente = (props) => {
                             </IonButton>
                         </IonCol>
                     </IonRow>
-                    {/* <IonRow class="row">
+                    <IonRow class="row">
                         <IonCol size="12">
                             <IonButton color="primary" class="boton" routerLink={getRoute("/seguimiento/examenes/") + id} expand="block" size="large">
                                 <div className="margen">
@@ -105,7 +105,7 @@ const HomePaciente = (props) => {
                                 </div>
                             </IonButton>
                         </IonCol>
-                    </IonRow> */}
+                    </IonRow>
                     {/* <IonRow  class="row">
               <IonCol  size="12">     
                 <IonButton color="primary" class="boton" routerLink="/cuidador/seguimiento" expand="block" size="large">

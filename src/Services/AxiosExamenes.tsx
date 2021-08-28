@@ -28,4 +28,20 @@ export default class AxiosExamenes {
     return AxiosExamenes.instanceAxios.post(`/almacenar_examenes_cita_paciente`, examenes, info);
   }
 
+  static deleteExamen = (exam: any) => {
+    return AxiosExamenes.instanceAxios.post(`/deleteExamen`, exam);
+  }
+
+  static saveExamen = (exam: any) => {
+    return AxiosExamenes.instanceAxios.post(`/saveExamen`, exam);
+  }
+
+  static editExamen = (exam: any) => {
+    return AxiosExamenes.instanceAxios.post(`/editExamen`, exam);
+  }
+
+  static getExamenByID = (exam: any) => {
+    return AxiosExamenes.instanceAxios.post(`/getExamenByID`, exam);
+  }  
+
 }
