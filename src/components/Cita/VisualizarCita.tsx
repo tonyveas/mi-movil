@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import {eye, eyeOff, heartOutline, home, imagesOutline, informationOutline, medkit, micOutline, removeCircle, removeCircleOutline, trash} from 'ionicons/icons';
 import AxiosUsers from '../../Services/AxiosUsers';
 import AxiosRoles from '../../Services/AxiosRoles';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
+// import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 // import { CameraResultType, CameraSource, CameraPhoto } from "@capacitor/core";
 import '../../../src/components/style.css';
 import moment from 'moment';
@@ -21,37 +21,9 @@ import {faThermometerQuarter,faWeight, faRulerVertical, faMale,
 
 const VisualizarCita = (props:any) => {
 
-    let imagePicker : ImagePicker;
+    // let imagePicker : ImagePicker;
 
     
-    const getPictures = () => {
-        let options: ImagePickerOptions = {  
-              //here Quality of images, defaults to 100  
-              quality: 100,  
-              //here Width of an Image  
-              width: 600,  
-              //here Height of an Image  
-              height: 600,  
-              /** Output type, defaults to 0 (FILE_URI). 
-        
-              * FILE_URI :0 (number) it returns a actual path for an image 
-        
-              */  
-              
-              outputType: 1,  
-              //here Maximum image count for selection, defaults to 15.  
-              //while setting a number 15 we can load 15 images in one selection.
-        
-              maximumImagesCount: 8
-              // max images to be selected, defaults to 15. If this is set to 1  
-            }; 
-        
-         imagePicker.getPictures(options)
-              .then(selectedImg => { })
-        }
-    
-
-
     const [mostrarLoad, setMostrarLoad] = React.useState(false);
     const [alergia, setAlergia] = React.useState(false);
     const [listaRoles, setListaRoles] = React.useState([]);

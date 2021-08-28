@@ -50,4 +50,8 @@ export default class AxiosPersonas {
         return AxiosPersonas.instanceAxios.post(`/cuidadores_paciente`, info);
     }
 
+    static cuidadores_de_paciente = (info:any) => {
+        return AxiosPersonas.instanceAxios.post(`/cuidadores_de_paciente`, info);
+    }
+
 }

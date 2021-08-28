@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import {eye, eyeOff, heartOutline, home, imagesOutline, informationOutline, medkit, micOutline, removeCircle, removeCircleOutline, trash} from 'ionicons/icons';
 import AxiosUsers from '../../Services/AxiosUsers';
 import AxiosRoles from '../../Services/AxiosRoles';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
+// import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 // import { CameraResultType, CameraSource, CameraPhoto } from "@capacitor/core";
 import '../../../src/components/style.css';
 import moment from 'moment';
@@ -12,43 +12,34 @@ import { IonBadge, IonSegment, IonSegmentButton } from '@ionic/react';
 import AxiosDiscapacidades from '../../Services/AxiosDiscapacidades';
 import AxiosMedicamentos from '../../Services/AxiosMedicamentos';
 import AxiosEnfermedades from '../../Services/AxiosEnfermedades';
+import AxiosExamenes from '../../Services/AxiosExamenes';
+import AxiosPersonas from '../../Services/AxiosPersonas';
+import AxiosCitas from '../../Services/AxiosCitas';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faThermometerQuarter,faWeight, faRulerVertical, faMale, 
         faLungs, faHeartbeat, faFileMedicalAlt, faDiagnoses, 
         faPercent, faHandHoldingHeart, faFileMedical} from '@fortawesome/free-solid-svg-icons';
+import { number } from 'yargs';
 
         
 
 const AtenderCita = (props:any) => {
 
-    let imagePicker : ImagePicker;
+    // let imagePicker : ImagePicker;
 
     
-    const getPictures = () => {
-        let options: ImagePickerOptions = {  
-              //here Quality of images, defaults to 100  
-              quality: 100,  
-              //here Width of an Image  
-              width: 600,  
-              //here Height of an Image  
-              height: 600,  
-              /** Output type, defaults to 0 (FILE_URI). 
+    // const getPictures = () => {
+    //     let options: ImagePickerOptions = {  
+    //           quality: 100,  
+    //           width: 600,  
+    //           height: 600,  
+    //           outputType: 1,  
+    //           maximumImagesCount: 8
+    //         }; 
         
-              * FILE_URI :0 (number) it returns a actual path for an image 
-        
-              */  
-              
-              outputType: 1,  
-              //here Maximum image count for selection, defaults to 15.  
-              //while setting a number 15 we can load 15 images in one selection.
-        
-              maximumImagesCount: 8
-              // max images to be selected, defaults to 15. If this is set to 1  
-            }; 
-        
-         imagePicker.getPictures(options)
-              .then(selectedImg => { })
-        }
+    //      imagePicker.getPictures(options)
+    //           .then(selectedImg => { })
+    //     }
     
 
 
@@ -58,7 +49,7 @@ const AtenderCita = (props:any) => {
     const [passwordMode, setPasswordMode] = React.useState(true);
     const [passwordModeConfirm, setPasswordModeConfirm] = React.useState(true);
     const [discapacidad, setDiscapacidad] = React.useState(false);
-    const [discapacidadesSeleccionadas, setDiscapacidadesSeleccionadas] = React.useState([]);
+    const [discapacidadesSeleccionadas, setDiscapacidadesSeleccionadas] = React.useState(new Array<any>());
     const [discapacidadesAgregadas, setDiscapacidadesAgregadas] = React.useState(new Array<any>());
     const [valoresDiscapacidadesAgregadas, setValoresDiscapacidadesAgregadas] = React.useState(new Array<any>());
     const [instrucciones, setInstrucciones] = React.useState("");
@@ -74,7 +65,7 @@ const AtenderCita = (props:any) => {
     const [valoresDuracionesAgregadas, setValoresDuracionesAgregadas] = React.useState(new Array<any>());
 
 
-    const [alergiasSeleccionadas, setAlergiasSeleccionadas] = React.useState([]);
+    const [alergiasSeleccionadas, setAlergiasSeleccionadas] = React.useState(new Array <any>());
     const [medicamentosSeleccionadas, setMedicamentosSeleccionadas] = React.useState([]);
 
     const [alergiasAgregadas, setAlergiasAgregadas] = React.useState(new Array<any>());
@@ -87,9 +78,9 @@ const AtenderCita = (props:any) => {
     const [signosAgregadas, setSignosAgregadas] = React.useState(new Array<any>());
     const [valoresSignosAgregadas, setValoresSignosAgregadas] = React.useState(new Array<any>());
 
-    const [enfermedadesPersistentesSeleccionadas, setEnfermedadesPersistentesSeleccionadas] = React.useState([]);
-    const [enfermedadesHereditariasSeleccionadas, setEnfermedadesHereditariasSeleccionadas] = React.useState([]);
-    const [enfermedadesDiagnosticoSeleccionadas, setEnfermedadesDiagnosticoSeleccionadas] = React.useState([]);
+    const [enfermedadesPersistentesSeleccionadas, setEnfermedadesPersistentesSeleccionadas] = React.useState(new Array<any>());
+    const [enfermedadesHereditariasSeleccionadas, setEnfermedadesHereditariasSeleccionadas] = React.useState(new Array<any>());
+    const [enfermedadesDiagnosticoSeleccionadas, setEnfermedadesDiagnosticoSeleccionadas] = React.useState(new Array<any>());
 
     const [indexDisc, setIndexDisc] = React.useState(0);
     const [indexAlergi, setIndexAlergi] = React.useState(0);
@@ -98,18 +89,39 @@ const AtenderCita = (props:any) => {
 
 
     const [estatura, setEstatura] = React.useState(0);
+    const [unidadEstatura, setUnidadEstatura] = React.useState("");
+
     const [peso, setPeso] = React.useState(0);
+    const [unidadPeso, setUnidadPeso] = React.useState("");
+
     const [masaCorporal, setMasaCorporal] = React.useState(0);
+    const [unidadMasaCorporal, setUnidadMasaCorporal] = React.useState("");
+
     const [porcentaje, setPorcentaje] = React.useState(0);
+    const [unidadPorcentaje, setUnidadPorcentaje] = React.useState("");
+
     const [masaMuscular, setMasaMuscular] = React.useState(0);
+    const [unidadMasaMuscular, setUnidadMasaMuscular] = React.useState("");
+
     const [tensionArterial, setTensionArterial] = React.useState(0);
+    const [unidadTensionArterial, setUnidadTensionArterial] = React.useState("");
+
     const [frecuenciaCardiaca, setFrecuenciaCardiaca] = React.useState(0);
+    const [unidadFrecuenciaCardiaca, setUnidadFrecuenciaCardiaca] = React.useState("");
+
     const [frecuenciaRespiratoria, setFrecuenciaRespiratoria] = React.useState(0);
+    const [unidadFrecuenciaRespiratoria, setUnidaFrecuenciaRespiratoria] = React.useState("");
+
     const [saturacion, setSaturacion] = React.useState(0);
+    const [unidadSaturacion, setUnidadSaturacion] = React.useState("");
+
     const [temperatura, setTemperatura] = React.useState(0);
+    const [unidadTemperatura, setUnidadTemperatura] = React.useState("");
 
     const [diagnostico, setDiagnostico] = React.useState("");
 
+    const [fileList, setFileList] = React.useState(new Array<any>());
+    // (key: string) => (obj: Record<string, any>) => obj[key]
     const [cedula, setCedula] = React.useState("");
     const [nombre, setNombre] = React.useState("");
     const [correo, setCorreo] = React.useState("");
@@ -138,8 +150,13 @@ const AtenderCita = (props:any) => {
     const [medicamentos, setMedicamentos] = React.useState([]);
     const [enfermedades, setEnfermedades] = React.useState([]);
     const [observaciones, setObservaciones] = React.useState(""); 
+    const [cedulaMedico, setCedulaMedico] = React.useState("");
+    const [cedulaPaciente, setCedulaPaciente] = React.useState("");
+    const [paciente, setPaciente] = React.useState([]);
+    const [cuidadoresDePaciente, setCuidadoresDePaciente] = React.useState([]);
 
     const {ced} = useParams<{ced:string}>();
+    const {id} = useParams<{id:string}>();
 
     useIonViewWillEnter(() => {
         //console.log('ionViewWillEnter event fired');
@@ -148,7 +165,7 @@ const AtenderCita = (props:any) => {
         mostrar_discapacidades();
         mostrar_medicamentos();
         mostrar_enfermedades();
-
+        informacion();
     });
 
     const mostrar_enfermedades = () => {
@@ -250,6 +267,8 @@ const AtenderCita = (props:any) => {
     });
 
     const terminar_cita = () => {
+       console.log("Terminar cita");
+
        
     }
 
@@ -482,6 +501,281 @@ const AtenderCita = (props:any) => {
 
     }
 
+
+    const subir_imagenes = () => {
+        console.log("CLICK");
+        console.log("FileList: ",fileList[0]);
+        let lista = fileList;
+        Object.keys(fileList[0]).forEach( e => {
+            let formData = new FormData();
+            formData.append("image_name", fileList[0][e]);
+
+            AxiosExamenes.almacenar_examen(formData).then( res => {
+                console.log("AxiosExamenes.almacenar_examen88888888: ",res);
+                let dataExamenNueva = {
+                                        seguimiento: 2,
+                                        diagnostico: "Sin datos",
+                                        tipo_examen: "examen",
+                                        medico: cedulaMedico,
+                                        paciente: cedulaPaciente,
+                                        comentarios: "Sin datos",
+                                        cita: id,
+                                        url_examen : res.data
+                };
+
+                // dataExamenNueva.url_examen = res.data;
+                // console.log("CIIIIIIIIIIIIIIIIIIIIIIIII: ",dataExamenNueva);
+                AxiosExamenes.almacenar_informacion_examen(dataExamenNueva).then( res2 => {
+                    console.log("AxiosExamenes.almacenar_informacion_examenwwwwwwww: ",res2);
+                });
+            }).catch(err => {
+                console.log('err.response.data', err.response.data);
+            });
+
+
+        });
+
+        //for (let i = 0; i < fileList.length; i++){
+        //    let formData = new FormData();
+        //    let prop: any = ""+i;
+            // var hotel = jsonObject.hoteles[i];
+            // Object.keys(fileList[0]).forEach( e => console.log("AA:", fileList[0][e]));
+            
+
+            // console.log("EXA: ", lista[prop]);
+            //console.log("fileList[0].originFileObj: ",fileList[0].originFileObj);
+            //formData.append("image_name", fileList[i].originFileObj);   
+            //console.log("FORM DATA: ", fileList[i].originFileObj);         
+//            AxiosExamenes.almacenar_examen(formData).then( res => {
+                
+                // let dataExamenNueva = {
+                //                         seguimiento: 2,
+                //                         diagnostico: "Sin datos",
+                //                         tipo_examen: "examen",
+                //                         medico: cedulaMedico,
+                //                         paciente: cedulaPaciente,
+                //                         comentarios: "Sin datos",
+                //                         cita: id
+                // };
+
+                // dataExamenNueva.url_examen = res.data;
+                // console.log("CIIIIIIIIIIIIIIIIIIIIIIIII: ",dataExamenNueva);
+                // AxiosExamenes.almacenar_informacion_examen(dataExamenNueva).then( res2 => {
+                //     console.log("AxiosExamenes.almacenar_informacion_examenwwwwwwww: ",res2);
+                // });
+//            }).catch(err => {
+//                console.log('err.response.data', err.response.data);
+//            });
+
+        //}
+        
+    }
+
+
+    const subir_imagenes2 = () => {
+        console.log("CLICK");
+        console.log("FileList: ",fileList[0]);
+        let lista = fileList;
+        let lista_examenes:any = []
+        Object.keys(fileList[0]).forEach( e => {
+
+            let formData = new FormData();
+            formData.append("image_name", fileList[0][e]);            
+            lista_examenes.push(formData);
+            console.log("AA: ",formData);
+        });
+        console.log("lista_examenes: ",lista_examenes[0].image_name);
+
+        AxiosExamenes.subir_examenes({"lista_examenes":lista_examenes}).then (res => {
+            console.log("EL EXAMN: ",res);
+        })
+
+        // Object.keys(fileList[0]).forEach( e => {
+        //     let formData = new FormData();
+        //     formData.append("image_name", fileList[0][e]);
+        //     AxiosExamenes.almacenar_examen(formData).then( res => {
+        //         console.log("AxiosExamenes.almacenar_examen88888888: ",res);
+        //         let dataExamenNueva = {
+        //                                 seguimiento: 2,
+        //                                 diagnostico: "Sin datos",
+        //                                 tipo_examen: "examen",
+        //                                 medico: cedulaMedico,
+        //                                 paciente: cedulaPaciente,
+        //                                 comentarios: "Sin datos",
+        //                                 cita: id,
+        //                                 url_examen : res.data
+        //         };
+        //         AxiosExamenes.almacenar_informacion_examen(dataExamenNueva).then( res2 => {
+        //             console.log("AxiosExamenes.almacenar_informacion_examenwwwwwwww: ",res2);
+        //         });
+        //     }).catch(err => {
+        //         console.log('err.response.data', err.response.data);
+        //     });
+        // });
+
+        
+    }
+
+    const informacion = () => {
+        AxiosUsers.informacion({id_cita: id}).then( response => {
+            console.log("id_cita: ",response);
+            setCedulaMedico(response.data[0].medico);
+            setCedulaPaciente(response.data[0].paciente);
+            setNombre(response.data[0].nombre);
+            setApellido(response.data[0].apellido);
+            AxiosUsers.info_paciente(response.data[0].paciente).then( response2 => {
+                console.log("LLLLLLLLLLLLLLLLLLL888888: ",response2.data);
+                setPaciente(response2.data[0])
+                console.log("MMMMMMM: ", response2.data[0].cedula)
+                AxiosPersonas.cuidadores_de_paciente({"cedula_paciente": (response2.data[0]).cedula}).then( res =>  {
+                    console.log("CUI222: ",res.data);
+                    setCuidadoresDePaciente(res.data);
+                });
+            });
+        });
+    }
+
+    const fcita = () => {
+        console.log("fcita");
+        console.log("discapacidadesSeleccionadas: ", discapacidadesSeleccionadas);
+        let temp_discapacidades = []; // Discapacidades seleccionadas ids
+        let listaDisc:any = [];       // Nombres de discapacidades que se agregan manualmente
+        for (let i = 0; i< discapacidadesSeleccionadas.length; i++ ){
+            let elem = discapacidadesSeleccionadas[i].split(",")
+            temp_discapacidades.push(elem[1]);
+        }
+
+        Object.keys(valoresDiscapacidadesAgregadas).forEach( (e:any) => {
+            listaDisc.push(valoresDiscapacidadesAgregadas[e]);
+            console.log("listaDisc: ",listaDisc);
+        });
+        console.log("temp_discapacidades: ",temp_discapacidades);
+        console.log("listaDisc: ",listaDisc);
+
+        let data = listaDisc;
+        let data_modificada = []
+        for (let i = 0 ; i < data.length; i++){
+            data_modificada.push({"nombre":data[i]});
+        }
+
+        let temp_alergias = [];
+        let listaAler:any = [];
+        for (let i = 0; i< alergiasSeleccionadas.length; i++ ){
+            let elem = alergiasSeleccionadas[i].split(",")
+            temp_alergias.push(elem[1]);
+        }
+
+        Object.keys(valoresAlergiasAgregadas).forEach( (e:any) => {
+            listaAler.push(valoresAlergiasAgregadas[e]);
+            console.log("listaAler: ",listaAler);
+        });
+        console.log("temp_alergias: ",temp_alergias);
+        console.log("listaAler: ",listaAler);
+
+        let data2 = listaAler;
+        let data_modificada2 = []
+        for (let i = 0 ; i < data2.length; i++){
+            data_modificada2.push({"nombre":data2[i]});
+        }
+
+        let temp_enfermedades_hereditarias = [];
+        for (let i = 0; i< enfermedadesHereditariasSeleccionadas.length; i++ ){
+            let elem = enfermedadesHereditariasSeleccionadas[i].split(",")
+            temp_enfermedades_hereditarias.push(elem[1]);
+        }
+
+        let data3 = temp_enfermedades_hereditarias;
+        let data_modificada3 = []
+        for (let i = 0 ; i < data3.length; i++){
+            data_modificada3.push({"enfermedad":data3[i]});
+        }
+
+        let temp_enfermedades_persistentes = [];
+        for (let i = 0; i< enfermedadesPersistentesSeleccionadas.length; i++ ){
+            let elem = enfermedadesPersistentesSeleccionadas[i].split(",")
+            temp_enfermedades_persistentes.push(elem[1]);
+        }
+
+        let data4 = temp_enfermedades_persistentes;
+        let data_modificada4 = []
+        for (let i = 0 ; i < data4.length; i++){
+            data_modificada4.push({"enfermedad":data4[i]});
+        }
+
+        
+
+        let signos_vitales_predeterminados = [{key: 'Estatura', value: estatura, unidad: unidadEstatura},
+                                              {key: 'Peso', value: peso, unidad: unidadPeso},
+                                              {key: 'Masa Coporal', value: masaCorporal, unidad: unidadMasaCorporal},
+                                              {key: 'Porcentaje de grasa corporal', value: porcentaje, unidad: unidadPorcentaje},
+                                              {key: 'Masa muscular', value: masaMuscular, unidad: unidadMasaMuscular},
+                                              {key: 'Tensión arterial', value: tensionArterial, unidad: unidadTensionArterial},
+                                              {key: 'Frecuencia cardíaca', value: frecuenciaCardiaca, unidad: unidadFrecuenciaCardiaca},
+                                              {key: 'Frecuencia respiratoria', value: frecuenciaRespiratoria, unidad: unidadFrecuenciaRespiratoria},
+                                              {key: 'Saturación de oxígeno', value: saturacion, unidad: unidadSaturacion},
+                                              {key: 'Temperatura', value: temperatura, unidad: unidadTemperatura}]
+
+        let signos_vitales_predeterminados_mod = signos_vitales_predeterminados.filter( item => (item.value!==0 && item.unidad!== ""));
+        
+        // let nuevas_discapacidades = discapacidadesAgregadas.filter( item => item.key!==id )
+
+        // valoresNombresAgregadas
+
+        // let signos_vitales_nuevos = listaSig;
+
+        // let signos_vitales_nuevos_mod:any = [] 
+        // for (let i = 0; i < signos_vitales_nuevos.length ; i++) {
+
+        //     signos_vitales_nuevos_mod.push({key: signos_vitales_nuevos[i].nombre_signo_vital, 
+        //                                     value: signos_vitales_nuevos[i].valor_signo_vital, 
+        //                                     unidad: signos_vitales_nuevos[i].unidad});
+
+        // }
+        
+        let signos_vitales_nuevos_mod:any = [] 
+        Object.keys(valoresNombresAgregadas).forEach( (e:any) => {
+            // signos_vitales_nuevos_mod.push(valoresNombresAgregadas[e]);
+            // signos_vitales_nuevos_mod.push(valoresCantidadesAgregadas[e]);
+            // signos_vitales_nuevos_mod.push(valoresUnidadesAgregadas[e]);
+            // signos_vitales_nuevos_mod.push(valoresUnidadesAgregadas[e]);
+            signos_vitales_nuevos_mod.push({key: valoresNombresAgregadas[e], 
+                                            value: valoresCantidadesAgregadas[e], 
+                                            unidad: valoresUnidadesAgregadas[e]});
+        });
+        let signos_vitales_totales = [...signos_vitales_nuevos_mod, ...signos_vitales_predeterminados_mod];
+        console.log("signos_vitales_nuevos_mod: ",signos_vitales_nuevos_mod);
+        console.log("signos_vitales_predeterminados: ",signos_vitales_predeterminados);
+        console.log("signos_vitales_predeterminados_mod: ", signos_vitales_predeterminados_mod);
+        console.log("signos_vitales_totales: ", signos_vitales_totales);
+
+        let cita = {
+            "discapacidades_agregadas_manualmente": data_modificada,
+            "discapacidades_seleccionadas": temp_discapacidades,
+            "alergias_agregadas_manualmente": data_modificada2,
+            "alergias_seleccionadas": temp_alergias,
+            "enfermedades_hereditarias_paciente": data_modificada3,
+            "enfermedades_persistentes_paciente": data_modificada4,
+            "paciente": cedulaPaciente,
+            "signos_vitales_paciente":signos_vitales_totales,
+            "id_cita": id,
+            "estado":  "A",
+            "observRec": observaciones,
+            "planTratam": tratamiento,
+            "instrucciones": instrucciones,
+            "sintomas": diagnostico,
+            "fecha_atencion": moment(new Date()).format('YYYY-MM-DD hh:mm:ss'),
+            "seguimiento": ""
+        };
+
+        AxiosCitas.guardar_cita2(cita).then( res => {
+            console.log("guardar_cita2: ",res);
+        }).catch( err => {
+            console.log("err ",err);
+        })
+
+
+    }
+
     return (
         <IonPage>
             <IonHeader>
@@ -557,8 +851,7 @@ const AtenderCita = (props:any) => {
                                             {
                                                 discapacidadesAgregadas.map( item => (
                                                             <IonItem key = {item.key}>
-                                                                {/* <IonLabel position="stacked">Nombre<IonText color="danger">*</IonText></IonLabel> */}
-                                                                {/* <IonInput className = "ion-margin-top" required disabled = {false} type="text" value = {nombre} onIonChange={ (e:any) => setNombre(e.target.value)} ></IonInput> */}
+
                                                                 <IonInput name = {"disc.discapacidad"+(item.key)} className = "ion-margin-top" required disabled = {false} onIonChange = {(e:any) => onChange(e)} type="text"></IonInput>
                                                                 <IonIcon className = "btn_eye_icon" icon = {removeCircleOutline} color = "primary" onClick = {() => remove_discapacidad(item.key)}></IonIcon>
 
@@ -670,6 +963,7 @@ const AtenderCita = (props:any) => {
                                             </IonItem>
                                         </IonCol>
                                     </IonRow>
+                                    <IonButton onClick = {() => fcita()}>Finalizar</IonButton>
                                 </IonCardContent>
                             </IonCard>
 
@@ -699,18 +993,22 @@ const AtenderCita = (props:any) => {
 
                                     <IonItem lines="none">
                                         <IonLabel><b>Estatura</b></IonLabel>
-                                        <IonInput value = {estatura} onIonChange={ (e:any) => setEstatura(e.target.value)} type="number" className="ps-5 ms-5" placeholder="valor"></IonInput>
-                                        <IonLabel> cm</IonLabel>
+                                        <IonInput value = {estatura} onIonChange={ (e:any) => setEstatura(e.target.value)} type="number" className="ps-5 ms-5"></IonInput>                                        
+                                        <IonInput value = {unidadEstatura} onIonChange={ (e:any) => setUnidadEstatura(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+
+                                        {/* <IonLabel> cm</IonLabel> */}
                                     </IonItem>
 
                                     <IonItem lines="none">
                                         <IonLabel className="me-4">
                                             <b>Peso</b>
                                         </IonLabel>
-                                        <IonInput value = {peso} onIonChange={ (e:any) => setPeso(e.target.value)} type="number" className="ps-5 ms-5" placeholder="valor"></IonInput>
-                                        <IonLabel >
+                                        <IonInput value = {peso} onIonChange={ (e:any) => setPeso(e.target.value)} type="number" className="ps-5 ms-5" ></IonInput>
+                                        <IonInput value = {unidadPeso} onIonChange={ (e:any) => setUnidadPeso(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+
+                                        {/* <IonLabel >
                                             kg
-                                        </IonLabel>
+                                        </IonLabel> */}
                                     </IonItem>
 
                                     <IonItem lines="none">
@@ -718,9 +1016,11 @@ const AtenderCita = (props:any) => {
                                             <b>M. corporal</b>
                                         </IonLabel>
                                         <IonInput value = {masaCorporal} onIonChange={ (e:any) => setMasaCorporal(e.target.value)} type="number" className="ps-5 ms-4" placeholder="valor"></IonInput>
-                                        <IonLabel >
+                                        <IonInput value = {unidadMasaCorporal} onIonChange={ (e:any) => setUnidadMasaCorporal(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+
+                                        {/* <IonLabel >
                                             Kg/m2
-                                        </IonLabel>
+                                        </IonLabel> */}
                                     </IonItem>
 
                                     <IonItem lines="none">
@@ -728,9 +1028,11 @@ const AtenderCita = (props:any) => {
                                             <b>Grasa corporal</b>
                                         </IonLabel>
                                         <IonInput value = {porcentaje} onIonChange={ (e:any) => setPorcentaje(e.target.value)} type="number" className="ms-4 ps-3" placeholder="valor"></IonInput>
-                                        <IonLabel>
+                                        <IonInput value = {unidadPorcentaje} onIonChange={ (e:any) => setUnidadPorcentaje(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+
+                                        {/* <IonLabel>
                                             %
-                                        </IonLabel>
+                                        </IonLabel> */}
                                     </IonItem>
 
                                     <IonItem lines="none">
@@ -738,9 +1040,11 @@ const AtenderCita = (props:any) => {
                                             <b>Masa muscular</b>
                                         </IonLabel>
                                         <IonInput value = {masaMuscular} onIonChange={ (e:any) => setMasaMuscular(e.target.value)} type="number" className="ps-4 ms-3" placeholder="valor"></IonInput>
-                                        <IonLabel>
+                                        <IonInput value = {unidadMasaMuscular} onIonChange={ (e:any) => setUnidadMasaMuscular(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+
+                                        {/* <IonLabel>
                                             %
-                                        </IonLabel>
+                                        </IonLabel> */}
                                     </IonItem>
 
                                     <IonItem lines="none">
@@ -748,9 +1052,11 @@ const AtenderCita = (props:any) => {
                                             <b>Tensión arterial</b>
                                         </IonLabel>
                                         <IonInput value = {tensionArterial} onIonChange={ (e:any) => setTensionArterial(e.target.value)} type="number" className="ps-4 ms-3" placeholder="valor"></IonInput>
-                                        <IonLabel>
+                                        <IonInput value = {unidadTensionArterial} onIonChange={ (e:any) => setUnidadTensionArterial(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+
+                                        {/* <IonLabel>
                                             mmHg
-                                        </IonLabel>
+                                        </IonLabel> */}
                                     </IonItem>
 
                                     <IonItem lines="none">
@@ -758,9 +1064,11 @@ const AtenderCita = (props:any) => {
                                             <b>F. cardíaca</b>
                                         </IonLabel>
                                         <IonInput value = {frecuenciaCardiaca} onIonChange={ (e:any) => setFrecuenciaCardiaca(e.target.value)} type="number" className="ps-4 ms-5" placeholder="valor"></IonInput>
-                                        <IonLabel>
+                                        <IonInput value = {unidadFrecuenciaCardiaca} onIonChange={ (e:any) => setUnidadFrecuenciaCardiaca(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+                                        
+                                        {/* <IonLabel>
                                             bmp
-                                        </IonLabel>
+                                        </IonLabel> */}
                                     </IonItem>
 
                                     <IonItem lines="none">
@@ -768,9 +1076,11 @@ const AtenderCita = (props:any) => {
                                             <b>F. respiratoria</b>
                                         </IonLabel>
                                         <IonInput value = {frecuenciaRespiratoria} onIonChange={ (e:any) => setFrecuenciaRespiratoria(e.target.value)} type="number" className="ps-2 ms-5" placeholder="valor"></IonInput>
-                                        <IonLabel>
+                                        <IonInput value = {unidadFrecuenciaRespiratoria} onIonChange={ (e:any) => setUnidaFrecuenciaRespiratoria(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+
+                                        {/* <IonLabel>
                                             r/m
-                                        </IonLabel>
+                                        </IonLabel> */}
                                     </IonItem>
 
                                     <IonItem lines="none">
@@ -778,8 +1088,10 @@ const AtenderCita = (props:any) => {
                                             <b>S. de oxígeno</b>
                                         </IonLabel>
                                         <IonInput value = {saturacion} onIonChange={ (e:any) => setSaturacion(e.target.value)} type="number" className="ps-2 ms-5" placeholder="valor"></IonInput>
-                                        <IonLabel>                                            
-                                        </IonLabel>
+                                        <IonInput value = {unidadSaturacion} onIonChange={ (e:any) => setUnidadSaturacion(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+
+                                        {/* <IonLabel>                                            
+                                        </IonLabel> */}
                                     </IonItem>
                                     
                                     <IonItem lines="none">
@@ -787,9 +1099,11 @@ const AtenderCita = (props:any) => {
                                             <b>Temperatura</b>
                                         </IonLabel>
                                         <IonInput value = {temperatura} onIonChange={ (e:any) => setTemperatura(e.target.value)} type="number" className="ps-3 ms-5" placeholder="valor"></IonInput>
-                                        <IonLabel>
+                                        <IonInput value = {unidadTemperatura} onIonChange={ (e:any) => setUnidadTemperatura(e.target.value)} type="text" className="ms-5" placeholder="unidad"></IonInput>                                        
+
+                                        {/* <IonLabel>
                                             °C
-                                        </IonLabel>
+                                        </IonLabel> */}
                                     </IonItem>
 
 
@@ -820,7 +1134,7 @@ const AtenderCita = (props:any) => {
                                         </IonCol>
                                     </IonRow>
 
-
+                                    <IonButton onClick = {() => fcita()}>Finalizar</IonButton>
 
                                 </IonCardContent>
                             </IonCard>
@@ -831,7 +1145,32 @@ const AtenderCita = (props:any) => {
                     actualPage === 2?
                         <>
                             {/* <IonButton onClick = {() => getPictures()}>UP</IonButton> */}
+                            <IonCard>
 
+                                <IonCardHeader>
+                                    <IonCardTitle className = "ion-text-center">
+                                        <b>
+
+                                            <IonLabel style = {{marginLeft:95, marginRight:95}}>
+                                                <b>Exámenes</b>
+                                            </IonLabel>
+                                            {/* <input type="file" name="examen" multiple className="custom-file-input"/> */}
+
+                                            {/* <label className="custom-file-input" htmlFor="Upload" >
+                                            </label>
+                                            <input id="Upload" type="file" multiple name="_photos" accept="image/*" style={{"visibility": "hidden"}}></input> */}
+
+                                            <label className="btn btn-primary mt-4 mb-4">
+                                            <i className="fa fa-image mt-2 mb-2"></i>{fileList.length>0?'Archivos seleccionados':'Seleccione los exámenes'}<input type="file" style={{"display": "none"}} onChange = {e => setFileList([e.target.files])} name="image" multiple/>
+                                            </label>
+                                            <br/>
+                                            <IonButton onClick = {() => subir_imagenes2()}>Subir</IonButton>
+                                        </b>
+                                    </IonCardTitle>
+                                    
+                                </IonCardHeader>
+
+                            </IonCard>
 
 
                         </>:null

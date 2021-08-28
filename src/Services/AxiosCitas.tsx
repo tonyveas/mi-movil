@@ -54,4 +54,8 @@ export default class AxiosCitas {
         return AxiosCitas.instanceAxios.post(`/citas_recordatorios_cuidador`, cedula);
     }
 
+    static guardar_cita2 = (info:any) => {
+        return AxiosCitas.instanceAxios.post(`/guardar_cita2`, info);
+    }
+
 }

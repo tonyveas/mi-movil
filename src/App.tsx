@@ -64,6 +64,7 @@ import FormAgendaCitasCuidador from './components/Cita/formAgendadoCitaCuidador'
 import RecordatoriosMedicos from './components/Medico/RecordatoriosMedicos';
 import RecordatoriosPacientes from './components/Paciente/RecordatoriosPacientes';
 import RecordatoriosCuidadores from './components/Cuidador/RecordatoriosCuidadores';
+import UploadImages from './components/Paciente/UploadImages';
 import HomeSeguimientos from './components/seguimientos/HomeSeguimientos';
 import IndexSeguimientos from './components/seguimientos/IndexSeguimiento';
 import InfoMedica from './components/seguimientos/InfoMedica';
@@ -108,6 +109,8 @@ const App: React.FC = () => {
             <PrivateRouteMedicoCC exact path='/medico/AgendaCitas' component={AgendaCitas}/>
             <PrivateRouteMedicoCC exact path='/medico/formAgendaCitas' component={FormAgendaCitas}/>
             <PrivateRouteMedicoCC exact path='/medico/formAgendaCitas/edit/:id' component={FormAgendaCitas}/>
+            <PrivateRouteMedico exact path='/medico/atenderCita' component={AtenderCita}/>
+            <PrivateRouteMedico exact path='/medico/atenderCita/:id' component={AtenderCita}/>
             <PrivateRouteMedicoCC exact path='/medico/seguimientos' component={HomeSeguimientos}/>
             <PrivateRouteMedicoCC exact path='/medico/seguimiento/:id' component={IndexSeguimientos}/>
             <PrivateRouteMedicoCC exact path='/medico/seguimiento/infomedica/:id' component={InfoMedica}/>
@@ -130,6 +133,7 @@ const App: React.FC = () => {
             {/* <PrivateRouteCuidador exact path='/paciente/homecuidadores' component={HomePacientesCuidador}/> */}
             <PrivateRoutePaciente exact path='/paciente/perfil/:ced' component={FormularioPerfiles} />
             <PrivateRoutePaciente exact path='/paciente' component={HomePaciente} />
+            <PrivateRoutePaciente exact path='/paciente/uploadimages' component={UploadImages} />
             <PrivateRoutePacienteCC exact path='/paciente/AgendaCitas' component={AgendaCitas}/>
             <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas' component={FormAgendaCitasPaciente}/>
             <PrivateRoutePacienteCC exact path='/paciente/formAgendaCitas/edit/:id' component={FormAgendaCitasPaciente}/>
