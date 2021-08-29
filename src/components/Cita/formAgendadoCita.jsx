@@ -77,13 +77,13 @@ export default class FormAgendadoCita extends React.Component {
     }
 
     getCitaByID() {
-        this.setState({isLoadingGet: true});
+        this.setState({ isLoadingGet: true });
         AxiosCitas.getCitaByID({ id: this.props.match.params.id }).then(resp => {
             console.log(resp);
             this.setState({ cita: resp.data, isLoadingGet: false });
         }).catch(err => {
             console.log(err);
-            this.setState({ isLoadingGet: false});
+            this.setState({ isLoadingGet: false });
         });
     }
 
@@ -171,6 +171,11 @@ export default class FormAgendadoCita extends React.Component {
                                     <IonCol>
                                         <IonButton color="primary" type="submit" class="ion-no-margin">{!this.state.editMode ? 'Agendar cita' : 'Guaradar cambios'}</IonButton>
                                     </IonCol>
+                                    {this.state.editMode && this.state.cita.estado === "P" ?
+                                        <IonCol>
+                                            <IonButton routerLink={this.getRoute('/atenderCita/' + this.props.match.params.id)} color="primary" class="ion-no-margin">Atender Cita</IonButton>
+                                        </IonCol> : null
+                                    }
                                     <IonCol>
                                         <IonButton routerLink={this.getRoute('/agendaCitas')} color="danger" class="ion-no-margin">
                                             Cancelar

@@ -46,6 +46,7 @@ export default class ItemCitas extends React.Component {
                     <IonAvatar slot="start">
                         <img src="./assets/img/icons/usuarios/usuario.png" alt="usuariol" />
                     </IonAvatar>
+                    {props.estado === "P" ? <IonButton size="default" fill="clear" routerLink={this.getRoute('/atenderCita/' + props.id_cita)}><IonIcon slot="end" color="medium" icon={create}></IonIcon></IonButton> : null }
                     {props.estado === "P" ? <IonButton size="default" fill="clear" onClick={() => this.props.handler_eliminar(props)}><IonIcon slot="end" color="medium" icon={trash}></IonIcon></IonButton> : null}
                 </IonItem>
 
