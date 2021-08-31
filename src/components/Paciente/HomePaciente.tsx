@@ -104,7 +104,7 @@ import Auth from '../../Login/Auth';
                 </IonButton>
               </IonCol>
             </IonRow>
-            <IonRow class="row">
+            {/* <IonRow class="row">
               <IonCol  size="12">     
                 <IonButton color="primary" class="boton" routerLink="/paciente/uploadimages" expand="block" size="large">
                 <div className="margen">
@@ -112,7 +112,7 @@ import Auth from '../../Login/Auth';
                 </div>  
                 </IonButton>
               </IonCol>
-            </IonRow>
+            </IonRow> */}
             {/* <IonRow  class="row">
               <IonCol  size="12">     
                 <IonButton color="primary" class="boton" routerLink="/cuidador/seguimiento" expand="block" size="large">
